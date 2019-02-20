@@ -45,8 +45,14 @@ public:
 
 	// The current active brush.
 	ImpBrush*			m_pCurrentBrush;	
-	// Size of the brush.
-	int m_nSize;							
+	
+	// brush parameters
+	int m_nSize;	
+	int m_nLineWidth;
+	int m_nLineAngle;
+	float m_nAlpha;
+
+
 
 	ImpressionistUI*	m_pUI;
 
