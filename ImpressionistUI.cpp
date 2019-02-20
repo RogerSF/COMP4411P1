@@ -12,6 +12,8 @@
 #include "impressionistUI.h"
 #include "impressionistDoc.h"
 
+#include "ImpBrush.h"
+
 /*
 //------------------------------ Widget Examples -------------------------------------------------
 Here is some example code for all of the widgets that you may need to add to the 
@@ -254,6 +256,20 @@ void ImpressionistUI::cb_brushChoice(Fl_Widget* o, void* v)
 
 	int type=(int)v;
 
+	switch (type) {
+		case BRUSH_POINTS:
+		case BRUSH_SCATTERED_POINTS:
+		case BRUSH_CIRCLES:
+		case BRUSH_SCATTERED_CIRCLES:
+			pUI->m_LineWidthSlider->deactivate();
+			pUI->m_LineAngleSlider->deactivate();
+			break;
+		case BRUSH_LINES:
+		case BRUSH_SCATTERED_LINES:
+			pUI->m_LineWidthSlider->activate();
+			pUI->m_LineAngleSlider->activate();
+			break;
+	}
 
 	pDoc->setBrushType(type);
 }
@@ -534,6 +550,7 @@ ImpressionistUI::ImpressionistUI() {
 		m_LineWidthSlider->value(m_nLineWidth);
 		m_LineWidthSlider->align(FL_ALIGN_RIGHT);
 		m_LineWidthSlider->callback(cb_widthSlides);
+		m_LineWidthSlider->deactivate(); // Deactivate slider first because the initial brush selection is not line
 
 		// Add line angle slider to the dialog 
 		m_LineAngleSlider = new Fl_Value_Slider(10, 140, 300, 20, "Line Angle");
@@ -547,6 +564,7 @@ ImpressionistUI::ImpressionistUI() {
 		m_LineAngleSlider->value(m_nLineAngle);
 		m_LineAngleSlider->align(FL_ALIGN_RIGHT);
 		m_LineAngleSlider->callback(cb_angleSlides);
+		m_LineAngleSlider->deactivate(); // Deactivate slider first because the initial brush selection is not line
 
 		// Add alpha slider to the dialog 
 		m_BrushAlphaSlider = new Fl_Value_Slider(10, 170, 300, 20, "Alpha");
