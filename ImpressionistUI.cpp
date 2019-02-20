@@ -508,7 +508,7 @@ ImpressionistUI::ImpressionistUI() {
 	// init values
 
 	m_nSize = 10;
-	m_nLineWidth = 10;
+	m_nLineWidth = 0;
 	m_nLineAngle = 0;
 	m_nAlpha = 1.0;
 
