@@ -580,6 +580,5 @@ ImpressionistUI::ImpressionistUI() {
 		m_BrushAlphaSlider->callback(cb_alphaSlides);
 
 
-    m_brushDialog->end();	
-
+    m_brushDialog->end();
 }
