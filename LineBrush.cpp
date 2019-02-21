@@ -37,16 +37,22 @@ void LineBrush::BrushMove( const Point source, const Point target )
 	int lineWidth = dlg->getLineWidth();
 	int direction = pDoc->m_pCurrentDirection;
 	float angle; 
-	if ( direction == 2 ) { // follows cursor direction
-		
-	}
-	else if ( direction == 1 ) { // gradient mode
 
+	switch (direction) {
+		case SLIDER: 
+			angle = dlg->getLineAngle() * M_PI / 180;
+			break;
+		case RIGHTMOUSE: 
+			angle = dlg->getLineAngle() * M_PI / 180;
+			break;
+		case GRADIENT: 
+			angle = dlg->getLineAngle() * M_PI / 180;
+			break;
+		case BRUSH_DIRECTION: 
+			angle = dlg->getLineAngle() * M_PI / 180;
+			break;
 	}
-	else { // takes slider value
-		angle = dlg->getLineAngle() * M_PI / 180;
-	}
-	
+
 
 
 	double xOffset= angle == 0 ? lineHalfSize : cos(angle) * lineHalfSize;

@@ -24,6 +24,7 @@ enum
 enum
 {
 	SLIDER = 0,
+	RIGHTMOUSE,
 	GRADIENT,
 	BRUSH_DIRECTION,
 	NUM_DIRECTION // Make sure this stays at the end!
