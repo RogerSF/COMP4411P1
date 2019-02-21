@@ -7,18 +7,18 @@
 
 #include "impressionistDoc.h"
 #include "impressionistUI.h"
-#include "linebrush.h"
+#include "CircleBrush.h"
 #include <cmath>
 #include <iostream>
 
 extern float frand();
 
-LineBrush::LineBrush( ImpressionistDoc* pDoc, char* name ) :
+CircleBrush::CircleBrush( ImpressionistDoc* pDoc, char* name ) :
 	ImpBrush(pDoc,name)
 {
 }
 
-void LineBrush::BrushBegin( const Point source, const Point target )
+void CircleBrush::BrushBegin( const Point source, const Point target )
 {
 	ImpressionistDoc* pDoc = GetDocument();
 	ImpressionistUI* dlg=pDoc->m_pUI;
@@ -30,13 +30,13 @@ void LineBrush::BrushBegin( const Point source, const Point target )
 	BrushMove( source, target );
 }
 
-void LineBrush::BrushMove( const Point source, const Point target )
+void CircleBrush::BrushMove( const Point source, const Point target )
 {
 	ImpressionistDoc* pDoc = GetDocument();
 	ImpressionistUI* dlg=pDoc->m_pUI;
 
 	if ( pDoc == NULL ) {
-		printf( "LineBrush::BrushMove, document is NULL\n" );
+		printf( "CircleBrush::BrushMove, document is NULL\n" );
 		return;
 	}
 
@@ -59,7 +59,7 @@ void LineBrush::BrushMove( const Point source, const Point target )
 	glEnd();
 }
 
-void LineBrush::BrushEnd( const Point source, const Point target )
+void CircleBrush::BrushEnd( const Point source, const Point target )
 {
 	// do nothing so far
 }
