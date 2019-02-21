@@ -10,8 +10,8 @@
 // out the reason and let me know. Thanks.
 //
 
-#include "bitmap.h"
- 
+#include "Bitmap.h"
+
 BMP_BITMAPFILEHEADER bmfh; 
 BMP_BITMAPINFOHEADER bmih; 
 

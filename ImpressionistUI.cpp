@@ -5,12 +5,12 @@
 //
 
 
-#include <FL/fl_ask.h>
+#include <FL/fl_ask.H>
 
 #include <math.h>
 
-#include "impressionistUI.h"
-#include "impressionistDoc.h"
+#include "ImpressionistUI.h"
+#include "ImpressionistDoc.h"
 
 #include "ImpBrush.h"
 

@@ -3,9 +3,9 @@
 #define SAMPLE_SOLUTION
 #include <stdio.h>
 
-#include <FL/Fl.h>
+#include <FL/Fl.H>
 #include <FL/gl.h>
-#include <GL/glu.h>
+#include <gl/GLU.h>
 
 #include "ImpBrush.h"
 

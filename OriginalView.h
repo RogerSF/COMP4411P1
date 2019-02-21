@@ -11,8 +11,8 @@
 
 #include <FL/Fl_Gl_Window.H>
 #include <FL/gl.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <gl/GL.h>
+#include <gl/GLU.h>
 
 #include <stdlib.h>
 

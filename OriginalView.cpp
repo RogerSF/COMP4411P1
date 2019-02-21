@@ -4,9 +4,9 @@
 // The code maintaining the original view of the input images
 //
 
-#include "impressionist.h"
-#include "impressionistDoc.h"
-#include "originalview.h"
+#include "Impressionist.h"
+#include "ImpressionistDoc.h"
+#include "OriginalView.h"
 
 #ifndef WIN32
 #define min(a, b)	( ( (a)<(b) ) ? (a) : (b) )

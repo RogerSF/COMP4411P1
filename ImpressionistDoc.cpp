@@ -7,8 +7,8 @@
 
 #include <FL/fl_ask.H>
 
-#include "impressionistDoc.h"
-#include "impressionistUI.h"
+#include "ImpressionistDoc.h"
+#include "ImpressionistUI.h"
 
 #include "ImpBrush.h"
 

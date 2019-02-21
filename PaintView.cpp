@@ -4,10 +4,10 @@
 // The code maintaining the painting view of the input images
 //
 
-#include "impressionist.h"
-#include "impressionistDoc.h"
-#include "impressionistUI.h"
-#include "paintview.h"
+#include "Impressionist.h"
+#include "ImpressionistDoc.h"
+#include "ImpressionistUI.h"
+#include "PaintView.h"
 #include "ImpBrush.h"
 
 

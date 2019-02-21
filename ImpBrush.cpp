@@ -4,8 +4,8 @@
 // The implementation of virtual brush. All the other brushes inherit from it.
 //
 
-#include "impressionistDoc.h"
-#include "impressionistUI.h"
+#include "ImpressionistDoc.h"
+#include "ImpressionistUI.h"
 #include "ImpBrush.h"
 
 // Static class member initializations

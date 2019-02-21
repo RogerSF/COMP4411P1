@@ -7,8 +7,8 @@
 #ifndef ImpressionistDoc_h
 #define ImpressionistDoc_h
 
-#include "impressionist.h"
-#include "bitmap.h"
+#include "Impressionist.h"
+#include "Bitmap.h"
 
 class ImpressionistUI;
 

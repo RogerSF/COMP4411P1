@@ -9,12 +9,12 @@
 
 #include <stdio.h>
 
-#include <FL/Fl.h>
+#include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Box.H>
 
-#include "impressionistUI.h"
-#include "impressionistDoc.h"
+#include "ImpressionistUI.h"
+#include "ImpressionistDoc.h"
 
 ImpressionistUI *impUI;
 ImpressionistDoc *impDoc;
