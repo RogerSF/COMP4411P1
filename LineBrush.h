@@ -5,7 +5,7 @@
 //
 
 #ifndef LINEBRUSH_H
-#define LINEBRUSH_HS
+#define LINEBRUSH_H
 
 #include "ImpBrush.h"
 

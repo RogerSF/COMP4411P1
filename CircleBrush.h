@@ -5,7 +5,7 @@
 //
 
 #ifndef CIRCLEBRUSH_H
-#define CIRCLEBRUSH_HS
+#define CIRCLEBRUSH_H
 
 #include "ImpBrush.h"
 
