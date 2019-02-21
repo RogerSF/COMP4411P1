@@ -6,9 +6,9 @@ Basics:
 - [X] Implement 5 different brush types:
   - [X] single line
   - [X] (filled) circles
-  - [ ] scattered points
-  - [ ] scattered lines
-  - [ ] scattered (filled) circles
+  - [X] scattered points
+  - [X] scattered lines
+  - [X] scattered (filled) circles
   - Note that scattered brushes should sample from each location they color individually, not just use a single color for each splotch.
   
 - [X] Add sliders to control various brush attributes. You need to include sliders for the line thickness and brush angle, in addition to the existing brush size slider.
