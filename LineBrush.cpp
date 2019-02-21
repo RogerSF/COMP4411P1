@@ -20,13 +20,6 @@ LineBrush::LineBrush( ImpressionistDoc* pDoc, char* name ) :
 
 void LineBrush::BrushBegin( const Point source, const Point target )
 {
-	ImpressionistDoc* pDoc = GetDocument();
-	ImpressionistUI* dlg=pDoc->m_pUI;
-
-	int size = pDoc->getSize();
-
-	glPointSize( (float)size );
-
 	BrushMove( source, target );
 }
 
