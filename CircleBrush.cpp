@@ -23,10 +23,6 @@ void CircleBrush::BrushBegin( const Point source, const Point target )
 	ImpressionistDoc* pDoc = GetDocument();
 	ImpressionistUI* dlg=pDoc->m_pUI;
 
-	int size = pDoc->getSize();
-
-	glPointSize( (float)size );
-
 	BrushMove( source, target );
 }
 
@@ -40,21 +36,17 @@ void CircleBrush::BrushMove( const Point source, const Point target )
 		return;
 	}
 
-	int lineHalfSize = pDoc->getSize() / 2;
-	int lineWidth = dlg->getLineWidth();
-	float angle = dlg->getLineAngle() * M_PI / 180;
+	float radius = float(pDoc->getSize());
 
+	glBegin( GL_TRIANGLE_FAN );
 
-	double xOffset= angle == 0 ? lineHalfSize : cos(angle) * lineHalfSize;
-	double yOffset = angle == 0 ? 0 : sin(angle) * lineHalfSize;
-
-
-	glLineWidth(float(lineWidth));
-
-	glBegin( GL_LINE_STRIP );
 		SetColor( source, dlg->getAlpha() );
-		glVertex2i(target.x - xOffset, target.y - yOffset);
-		glVertex2i(target.x + xOffset, target.y + yOffset);
+
+		glVertex2d(target.x, target.y);
+		for (int i = 0; i < 360; i++) {
+			float angle = i * M_PI / 180;
+			glVertex2f(target.x + radius * cos(angle), target.y + radius * sin(angle));
+		}
 
 	glEnd();
 }
