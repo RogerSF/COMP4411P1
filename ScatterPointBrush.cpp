@@ -35,7 +35,7 @@ void ScatterPointBrush::BrushMove( const Point source, const Point target )
 	}
 
 	int bound = pDoc->getSize();
-	int pointCount = this->randomCountFactor * bound; // Scale random point count by size
+	int pointCount = int(this->randomCountFactor * bound); // Scale random point count by size
 
 	for(int i = 0; i < pointCount; i++)
 	{
