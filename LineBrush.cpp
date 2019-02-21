@@ -35,7 +35,18 @@ void LineBrush::BrushMove( const Point source, const Point target )
 
 	int lineHalfSize = pDoc->getSize() / 2;
 	int lineWidth = dlg->getLineWidth();
-	float angle = dlg->getLineAngle() * M_PI / 180;
+	int direction = pDoc->m_pCurrentDirection;
+	float angle; 
+	if ( direction == 2 ) { // follows cursor direction
+		
+	}
+	else if ( direction == 1 ) { // gradient mode
+
+	}
+	else { // takes slider value
+		angle = dlg->getLineAngle() * M_PI / 180;
+	}
+	
 
 
 	double xOffset= angle == 0 ? lineHalfSize : cos(angle) * lineHalfSize;
