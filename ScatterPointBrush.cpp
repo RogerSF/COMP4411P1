@@ -1,53 +1,52 @@
 //
 // ScatterPointBrush.cpp
 //
-// The implementation of Point Brush. It is a kind of ImpBrush. All your brush implementations
+// The implementation of Scatter Point Brush. It is a kind of ImpBrush. All your brush implementations
 // will look like the file with the different GL primitive calls.
 //
 
 #include "ImpressionistDoc.h"
 #include "ImpressionistUI.h"
-#include "PointBrush.h"
+#include "ScatterPointBrush.h"
+#include <ctime>
 
 extern float frand();
 
-PointBrush::PointBrush( ImpressionistDoc* pDoc, char* name ) :
-	ImpBrush(pDoc,name)
+ScatterPointBrush::ScatterPointBrush(ImpressionistDoc* pDoc, char* name) : PointBrush(pDoc, name)
 {
+	srand(time(nullptr));
 }
 
-void PointBrush::BrushBegin( const Point source, const Point target )
+void ScatterPointBrush::BrushBegin(const Point source, const Point target)
 {
-	ImpressionistDoc* pDoc = GetDocument();
-	ImpressionistUI* dlg=pDoc->m_pUI;
+	glPointSize(1);  // A scatter point brush scatter very small points within size square
 
-	int size = pDoc->getSize();
-
-	glPointSize( (float)size );
-
-	BrushMove( source, target );
+	BrushMove(source, target);
 }
 
-void PointBrush::BrushMove( const Point source, const Point target )
+void ScatterPointBrush::BrushMove( const Point source, const Point target )
 {
 	ImpressionistDoc* pDoc = GetDocument();
 	ImpressionistUI* dlg=pDoc->m_pUI;
 
 	if ( pDoc == NULL ) {
-		printf( "PointBrush::BrushMove, document is NULL\n" );
+		printf( "ScatterPointBrush::BrushMove, document is NULL\n" );
 		return;
 	}
 
-	glBegin( GL_POINTS );
+	int bound = pDoc->getSize();
+	int pointCount = this->randomCountFactor * bound; // Scale random point count by size
 
-		SetColor( source, dlg->getAlpha() );
-		glVertex2d( target.x, target.y );
+	for(int i = 0; i < pointCount; i++)
+	{
+		// Random the point within center +- bound / 2
+		int randomX = (rand() % (bound + 1)) - (bound / 2);
+		int randomY = (rand() % (bound + 1)) - (bound / 2);
 
-	glEnd();
-}
+		Point randSource = Point(source.x + randomX, source.y + randomY);
+		Point randTarget = Point(target.x + randomX, target.y + randomY);
 
-void PointBrush::BrushEnd( const Point source, const Point target )
-{
-	// do nothing so far
+		PointBrush::BrushMove(randSource, randTarget);
+	}
 }
 
