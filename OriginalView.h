@@ -29,12 +29,19 @@ public:
 	void refresh();
 
 	void resizeWindow(int width, int height);
+	void setMarkerPoint(const Point& marker);
+	void setBrushSize(const int size);
 
 	ImpressionistDoc*	m_pDoc;
 
 private:
 	int	m_nWindowWidth, 
 		m_nWindowHeight;
+
+	Point marker;
+	int brushSize = 10;
+	void drawMarker();
+	const float markerRadius = 2.0;
 
 };
 

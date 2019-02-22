@@ -179,6 +179,8 @@ int PaintView::handle(int event)
 		else
 			eventToDo=LEFT_MOUSE_DRAG;
 		isAnEvent=1;
+		// Draw the marker on top of the original image view
+		m_pDoc->m_pUI->m_origView->setMarkerPoint(coord);
 		redraw();
 		break;
 	case FL_RELEASE:
@@ -199,14 +201,18 @@ int PaintView::handle(int event)
 		m_pDoc->CursorHisPos[0] = new Vector(coord.x, coord.y);
 		// cout<<"CursorPos[0]: ( " << m_pDoc->CursorHisPos[0]->x << " , " << m_pDoc->CursorHisPos[0]->y << " ); CursorPos[1]: ( " << m_pDoc->CursorHisPos[1]->x << " , " << m_pDoc->CursorHisPos[1]->y << " ). "<<endl;
 
+		// Draw the marker on top of the original image view
+		m_pDoc->m_pUI->m_origView->setMarkerPoint(coord);
+		break;
+	case FL_MOUSEWHEEL:
+		// Fancy function to increment or decrement the brush size using mouse wheel
+		m_pDoc->m_pUI->setSize(m_pDoc->m_pUI->getSize() - Fl::event_dy());
 		break;
 	default:
 		return 0;
 		break;
 
 	}
-
-
 
 	return 1;
 }

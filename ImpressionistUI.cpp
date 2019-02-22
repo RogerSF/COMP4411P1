@@ -264,6 +264,7 @@ void ImpressionistUI::cb_brushChoice(Fl_Widget* o, void* v)
 			pUI->m_LineWidthSlider->deactivate();
 			pUI->m_LineAngleSlider->deactivate();
 			pUI->m_BrushSizeSlider->deactivate();
+			pUI->setSize(0);
 			break;
 		case BRUSH_POINTS:
 		case BRUSH_SCATTERED_POINTS:
@@ -322,6 +323,7 @@ void ImpressionistUI::cb_clear_canvas_button(Fl_Widget* o, void* v)
 void ImpressionistUI::cb_sizeSlides(Fl_Widget* o, void* v)
 {
 	((ImpressionistUI*)(o->user_data()))->m_nSize=int( ((Fl_Slider *)o)->value() ) ;
+	((ImpressionistUI*)(o->user_data()))->m_origView->setBrushSize(int(((Fl_Slider *)o)->value()));
 }
 
 //-----------------------------------------------------------
@@ -425,10 +427,12 @@ int ImpressionistUI::getSize()
 //-------------------------------------------------
 void ImpressionistUI::setSize( int size )
 {
-	m_nSize=size;
-
-	if (size<=40) 
+	if (size >= 0 && size <= 40)
+	{
+		m_nSize = size;
+		m_origView->setBrushSize(size);
 		m_BrushSizeSlider->value(m_nSize);
+	}
 }
 
 //------------------------------------------------

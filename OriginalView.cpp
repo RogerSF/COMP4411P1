@@ -7,6 +7,7 @@
 #include "Impressionist.h"
 #include "ImpressionistDoc.h"
 #include "OriginalView.h"
+#include <cmath>
 
 #ifndef WIN32
 #define min(a, b)	( ( (a)<(b) ) ? (a) : (b) )
@@ -74,7 +75,7 @@ void OriginalView::draw()
 		glPixelStorei( GL_UNPACK_ROW_LENGTH, m_pDoc->m_nWidth );
 		glDrawBuffer( GL_BACK );
 		glDrawPixels( drawWidth, drawHeight, GL_RGB, GL_UNSIGNED_BYTE, bitstart );
-
+		drawMarker(); // Draw the marker
 	}
 			
 	glFlush();
@@ -91,3 +92,38 @@ void OriginalView::resizeWindow(int	width,
 	resize(x(), y(), width, height);
 }
 
+void OriginalView::setMarkerPoint(const Point& marker)
+{
+	this->marker = marker;
+	redraw(); // Trigger redraw to draw the marker on top of the original image
+}
+
+void OriginalView::setBrushSize(const int size)
+{
+	this->brushSize = size;
+	redraw();
+}
+
+
+void OriginalView::drawMarker()
+{
+	float correctedY = m_nWindowHeight - this->marker.y;
+
+	// Draw the marker dot
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3ub(255, 0, 0);
+	glVertex2d(this->marker.x, correctedY);
+	for (int i = 0; i < 360; i++) {
+		float angle = i * M_PI / 180;
+		glVertex2f(this->marker.x + this->markerRadius * cos(angle), correctedY + this->markerRadius * sin(angle));
+	}
+	glEnd();
+
+	// Draw the brush size indicator
+	glBegin(GL_LINE_LOOP);
+	for (int i = 0; i < 360; i++) {
+		float angle = i * M_PI / 180;
+		glVertex2f(this->marker.x + this->brushSize * cos(angle), correctedY + this->brushSize * sin(angle));
+	}
+	glEnd();
+}

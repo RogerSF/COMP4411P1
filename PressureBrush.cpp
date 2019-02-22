@@ -58,6 +58,7 @@ void PressureBrush::BrushMove( const Point source, const Point target )
 
 	// Set the mean as the radius size, factored by 
 	float radius = mean * this->radiusFactor;
+	dlg->setSize(int(radius));
 
 	glBegin( GL_TRIANGLE_FAN );
 
