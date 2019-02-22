@@ -115,12 +115,13 @@ void PaintView::draw()
 			break;
 		case LEFT_MOUSE_DRAG:
 			m_pDoc->m_pCurrentBrush->BrushMove( source, target );
+
+			// Clipping the brush stroke as they are painted
+			SaveCurrentContent();
+			RestoreContent();
 			break;
 		case LEFT_MOUSE_UP:
 			m_pDoc->m_pCurrentBrush->BrushEnd( source, target );
-
-			SaveCurrentContent();
-			RestoreContent();
 			break;
 		case RIGHT_MOUSE_DOWN:
 			m_pDoc->rightMousePos[1]->x = coord.x;
