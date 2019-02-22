@@ -31,10 +31,14 @@ ImpressionistDoc::ImpressionistDoc()
 	m_ucBitmap		= NULL;
 	m_ucPainting	= NULL;
 
+	// cursor array initialization
 	CursorHisPos = new Vector*[2];
 	CursorHisPos[0] = new Vector(0, 0);
 	CursorHisPos[1] = new Vector(0, 0);
 
+	rightMousePos = new Vector*[2];
+	rightMousePos[0] = new Vector(0, 0);
+	rightMousePos[1] = new Vector(0, 0);
 
 	// create one instance of each brush
 	ImpBrush::c_nBrushCount	= NUM_BRUSH_TYPE;

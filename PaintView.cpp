@@ -123,13 +123,18 @@ void PaintView::draw()
 			RestoreContent();
 			break;
 		case RIGHT_MOUSE_DOWN:
-
+			m_pDoc->rightMousePos[1]->x = coord.x;
+			m_pDoc->rightMousePos[1]->y = coord.y;
+			cout<<m_pDoc->rightMousePos[0]->x <<" , "<< m_pDoc->rightMousePos[0]->y <<" , "<< m_pDoc->rightMousePos[1]->x << " , " << m_pDoc->rightMousePos[1]->y << " ---> ";
 			break;
 		case RIGHT_MOUSE_DRAG:
 
 			break;
 		case RIGHT_MOUSE_UP:
-
+			m_pDoc->rightMousePos[0]->x = coord.x;
+			m_pDoc->rightMousePos[0]->y = coord.y;
+			cout<<m_pDoc->rightMousePos[0]->x <<" , "<< m_pDoc->rightMousePos[0]->y <<" , "<< m_pDoc->rightMousePos[1]->x << " , " << m_pDoc->rightMousePos[1]->y << endl;
+			
 			break;
 
 		default:

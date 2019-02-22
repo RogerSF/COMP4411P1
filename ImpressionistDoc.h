@@ -43,8 +43,11 @@ public:
 	unsigned char*	m_ucBitmap;
 	unsigned char*	m_ucPainting;
 
+	// Vector array used to record cursor position
 	Vector** CursorHisPos;
 
+	// Vector array used for right click direction
+	Vector** rightMousePos;
 
 	// The current active brush.
 	ImpBrush*			m_pCurrentBrush;	

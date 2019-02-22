@@ -46,25 +46,25 @@ void LineBrush::BrushMove( const Point source, const Point target )
 			angle = dlg->getLineAngle() * M_PI / 180;
 			break;
 		case RIGHTMOUSE: 
-			angle = dlg->getLineAngle() * M_PI / 180;
+			grad = new Vector( pDoc->rightMousePos[0]->x - pDoc->rightMousePos[1]->x, pDoc->rightMousePos[0]->y - pDoc->rightMousePos[1]->y );			
+			// cout<< "Indicated direction X: " << grad->x <<" Y: " << grad->y <<endl;
+			angle = atan2( -1 * grad->y, grad->x);
+			
+			// angle = dlg->getLineAngle() * M_PI / 180;
 			break;
 		case GRADIENT: 	
 			grad = GetGradient(source);
 			// cout<<"Gradient X: "<<grad->x <<" Y: " << grad->y <<endl;
-
-
 			angle = atan2( grad->x, grad->y);
-
 			//angle = dlg->getLineAngle() * M_PI / 180;
 			break;
 		case BRUSH_DIRECTION: 
 			grad = new Vector( pDoc->CursorHisPos[0]->x - pDoc->CursorHisPos[1]->x, pDoc->CursorHisPos[0]->y - pDoc->CursorHisPos[1]->y );			
 			// cout<<"Moving Direction X: "<<grad->x <<" Y: " << grad->y <<endl;
-
 			angle = atan2( grad->y, grad->x);
 			break;
 	}
-	// cout<<"Angle: "<<angle<<endl;
+	// cout<<"Angle: "<<angle* M_PI / 180 <<endl;
 
 
 	double xOffset= angle == 0 ? lineHalfSize : cos(angle) * lineHalfSize;
