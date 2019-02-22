@@ -259,18 +259,26 @@ void ImpressionistUI::cb_brushChoice(Fl_Widget* o, void* v)
 	int type=(int)v;
 
 	switch (type) {
+		// Disable brush size slider when using pressure brush
+		case BRUSH_PRESSURE:
+			pUI->m_LineWidthSlider->deactivate();
+			pUI->m_LineAngleSlider->deactivate();
+			pUI->m_BrushSizeSlider->deactivate();
+			break;
 		case BRUSH_POINTS:
 		case BRUSH_SCATTERED_POINTS:
 		case BRUSH_CIRCLES:
 		case BRUSH_SCATTERED_CIRCLES:
 			pUI->m_LineWidthSlider->deactivate();
 			pUI->m_LineAngleSlider->deactivate();
+			pUI->m_BrushSizeSlider->activate();
 			pUI->m_StrokeDirectionChoice->deactivate();
 			break;
 		case BRUSH_LINES:
 		case BRUSH_SCATTERED_LINES:
 			pUI->m_LineWidthSlider->activate();
 			pUI->m_LineAngleSlider->activate();
+			pUI->m_BrushSizeSlider->activate();
 			pUI->m_StrokeDirectionChoice->activate();
 			break;
 	}
@@ -510,6 +518,7 @@ Fl_Menu_Item ImpressionistUI::brushTypeMenu[NUM_BRUSH_TYPE+1] = {
   {"Scattered Points",	FL_ALT+'q', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_POINTS},
   {"Scattered Lines",	FL_ALT+'m', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_LINES},
   {"Scattered Circles",	FL_ALT+'d', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_CIRCLES},
+  {"Pressure",	FL_ALT + 'x', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_PRESSURE},
   {0}
 };
 

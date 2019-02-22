@@ -19,6 +19,7 @@
 #include "ScatterPointBrush.h"
 #include "ScatterLineBrush.h"
 #include "ScatterCircleBrush.h"
+#include "PressureBrush.h"
 
 #define DESTROY(p)	{  if ((p)!=NULL) {delete [] p; p=NULL; } }
 
@@ -57,6 +58,8 @@ ImpressionistDoc::ImpressionistDoc()
 		= new ScatterLineBrush( this, "Scattered Lines" );
 	ImpBrush::c_pBrushes[BRUSH_SCATTERED_CIRCLES]	
 		= new ScatterCircleBrush( this, "Scattered Circles" );
+	ImpBrush::c_pBrushes[BRUSH_PRESSURE]
+		= new PressureBrush(this, "Pressure");
 
 	// make one of the brushes current
 	m_pCurrentBrush	= ImpBrush::c_pBrushes[0];
