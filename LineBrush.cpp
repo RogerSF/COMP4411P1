@@ -59,7 +59,7 @@ void LineBrush::BrushMove( const Point source, const Point target )
 			break;
 		case BRUSH_DIRECTION: 
 			grad = new Vector( pDoc->CursorHisPos[0]->x - pDoc->CursorHisPos[1]->x, pDoc->CursorHisPos[0]->y - pDoc->CursorHisPos[1]->y );			
-			cout<<"Moving Direction X: "<<grad->x <<" Y: " << grad->y <<endl;
+			// cout<<"Moving Direction X: "<<grad->x <<" Y: " << grad->y <<endl;
 
 			angle = atan2( grad->y, grad->x);
 			break;

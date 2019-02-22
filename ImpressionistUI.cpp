@@ -291,7 +291,7 @@ void ImpressionistUI::cb_strokeDirectionChoice(Fl_Widget* o, void* v)
 	int type=(int)v;
 
 	pDoc->setStrokeDirection(type);
-	cout<<"Current Stroke Direction is "<<type<<endl;
+	// cout<<"Current Stroke Direction is "<<type<<endl;
 }
 
 //------------------------------------------------------------

@@ -191,7 +191,7 @@ int PaintView::handle(int event)
 
 		m_pDoc->CursorHisPos[1] = m_pDoc->CursorHisPos[0];
 		m_pDoc->CursorHisPos[0] = new Vector(coord.x, coord.y);
-		cout<<"CursorPos[0]: ( " << m_pDoc->CursorHisPos[0]->x << " , " << m_pDoc->CursorHisPos[0]->y << " ); CursorPos[1]: ( " << m_pDoc->CursorHisPos[1]->x << " , " << m_pDoc->CursorHisPos[1]->y << " ). "<<endl;
+		// cout<<"CursorPos[0]: ( " << m_pDoc->CursorHisPos[0]->x << " , " << m_pDoc->CursorHisPos[0]->y << " ); CursorPos[1]: ( " << m_pDoc->CursorHisPos[1]->x << " , " << m_pDoc->CursorHisPos[1]->y << " ). "<<endl;
 
 		break;
 	default:
