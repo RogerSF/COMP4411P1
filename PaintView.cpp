@@ -9,6 +9,8 @@
 #include "ImpressionistUI.h"
 #include "PaintView.h"
 #include "ImpBrush.h"
+#include <iostream>
+using namespace std;
 
 
 #define LEFT_MOUSE_DOWN		1
@@ -186,6 +188,11 @@ int PaintView::handle(int event)
 	case FL_MOVE:
 		coord.x = Fl::event_x();
 		coord.y = Fl::event_y();
+
+		m_pDoc->CursorHisPos[1] = m_pDoc->CursorHisPos[0];
+		m_pDoc->CursorHisPos[0] = new Vector(coord.x, coord.y);
+		cout<<"CursorPos[0]: ( " << m_pDoc->CursorHisPos[0]->x << " , " << m_pDoc->CursorHisPos[0]->y << " ); CursorPos[1]: ( " << m_pDoc->CursorHisPos[1]->x << " , " << m_pDoc->CursorHisPos[1]->y << " ). "<<endl;
+
 		break;
 	default:
 		return 0;

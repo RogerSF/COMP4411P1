@@ -346,6 +346,25 @@ void ImpressionistUI::cb_alphaSlides(Fl_Widget* o, void* v)
 	((ImpressionistUI*)(o->user_data()))->m_nAlpha=float( ((Fl_Slider *)o)->value() ) ;
 }
 
+
+//-----------------------------------------------------------
+// Updates the CursorHisPos Vector array
+// Called by the UI when mouse moves over the window
+//--------------------------------------------------------z---
+// void ImpressionistUI::cb_cursor_pos(GLFWwindow* window, double xpos, double ypos)
+// {
+
+// 	//Vector* temp = m_pDoc->CursorHisPos[0];
+// 	m_pDoc->CursorHisPos[1] = m_pDoc->CursorHisPos[0];
+// 	m_pDoc->CursorHisPos[0] = new Vector(xpos, ypos);
+
+// 	
+
+// }
+
+
+
+
 //---------------------------------- per instance functions --------------------------------------
 
 //------------------------------------------------
@@ -615,6 +634,8 @@ ImpressionistUI::ImpressionistUI() {
 		m_BrushAlphaSlider->align(FL_ALIGN_RIGHT);
 		m_BrushAlphaSlider->callback(cb_alphaSlides);
 
+		//Try to capture cursor movement within the UI Initializer
+		// glfwSetCursorPosCallback(m_mainWindow, cb_cursor_pos);
 
     m_brushDialog->end();
 }

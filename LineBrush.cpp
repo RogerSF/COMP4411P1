@@ -39,6 +39,7 @@ void LineBrush::BrushMove( const Point source, const Point target )
 	int lineWidth = dlg->getLineWidth();
 	int direction = pDoc->m_pCurrentDirection;
 	float angle = 0;
+	Vector* grad;
 
 	switch (direction) {
 		case SLIDER: 
@@ -47,10 +48,9 @@ void LineBrush::BrushMove( const Point source, const Point target )
 		case RIGHTMOUSE: 
 			angle = dlg->getLineAngle() * M_PI / 180;
 			break;
-		case GRADIENT: 
-			Vector* grad;
+		case GRADIENT: 	
 			grad = GetGradient(source);
-			cout<<"Gradient X: "<<grad->x <<" Y: " << grad->y <<endl;
+			// cout<<"Gradient X: "<<grad->x <<" Y: " << grad->y <<endl;
 
 
 			angle = atan2( grad->x, grad->y);
@@ -58,10 +58,13 @@ void LineBrush::BrushMove( const Point source, const Point target )
 			//angle = dlg->getLineAngle() * M_PI / 180;
 			break;
 		case BRUSH_DIRECTION: 
-			angle = dlg->getLineAngle() * M_PI / 180;
+			grad = new Vector( pDoc->CursorHisPos[0]->x - pDoc->CursorHisPos[1]->x, pDoc->CursorHisPos[0]->y - pDoc->CursorHisPos[1]->y );			
+			cout<<"Moving Direction X: "<<grad->x <<" Y: " << grad->y <<endl;
+
+			angle = atan2( grad->y, grad->x);
 			break;
 	}
-	cout<<"Angle: "<<angle<<endl;
+	// cout<<"Angle: "<<angle<<endl;
 
 
 	double xOffset= angle == 0 ? lineHalfSize : cos(angle) * lineHalfSize;

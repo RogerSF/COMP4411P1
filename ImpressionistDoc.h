@@ -39,9 +39,11 @@ public:
 	// Dimensions of the paint window.
 	int				m_nPaintWidth, 
 					m_nPaintHeight;	
-	// Bitmaps for original image and painting.
+	// Bitmaps for original image and painting. 
 	unsigned char*	m_ucBitmap;
 	unsigned char*	m_ucPainting;
+
+	Vector** CursorHisPos;
 
 
 	// The current active brush.
@@ -64,6 +66,8 @@ public:
 	GLubyte* GetOriginalPixel( int x, int y );   
 	// Get the color of the original picture at the specified point	
 	GLubyte* GetOriginalPixel( const Point p );  
+
+	
 
 
 private:

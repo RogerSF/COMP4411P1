@@ -16,8 +16,8 @@ Basics:
 - [ ] Add the ability to control the brush direction. The stroke direction should be controlled four different ways: 
   - [X] using a slider value
   - [ ] using the right mouse button to drag out a direction line
-  - [ ] using the direction of the cursor movement
-  - [ ] using directions that are perpendicular to the gradient of the image. 
+  - [X] using the direction of the cursor movement
+  - [X] using directions that are perpendicular to the gradient of the image. 
   - You can use a radio box to allow the user to select which method to use.
   
 - [X] Allow the user to change the opacity (alpha value) of the brush stroke. An alpha value slider should be added to the controls window.
