@@ -13,9 +13,9 @@ Basics:
   
 - [X] Add sliders to control various brush attributes. You need to include sliders for the line thickness and brush angle, in addition to the existing brush size slider.
 
-- [ ] Add the ability to control the brush direction. The stroke direction should be controlled four different ways: 
+- [X] Add the ability to control the brush direction. The stroke direction should be controlled four different ways: 
   - [X] using a slider value
-  - [ ] using the right mouse button to drag out a direction line
+  - [X] using the right mouse button to drag out a direction line
   - [X] using the direction of the cursor movement
   - [X] using directions that are perpendicular to the gradient of the image. 
   - You can use a radio box to allow the user to select which method to use.
