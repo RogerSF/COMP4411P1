@@ -48,15 +48,13 @@ public:
 	ImpBrush*			m_pCurrentBrush;	
 
 	//The current stroke direction
-	int m_pCurrentDirection;
+	int m_pCurrentDirection = 0;
 	
 	// brush parameters
 	int m_nSize;	
 	int m_nLineWidth;
 	int m_nLineAngle;
 	float m_nAlpha;
-
-
 
 	ImpressionistUI*	m_pUI;
 

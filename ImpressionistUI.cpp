@@ -13,6 +13,8 @@
 #include "ImpressionistDoc.h"
 
 #include "ImpBrush.h"
+#include <iostream>
+using namespace std;
 
 /*
 //------------------------------ Widget Examples -------------------------------------------------
@@ -281,13 +283,15 @@ void ImpressionistUI::cb_brushChoice(Fl_Widget* o, void* v)
 // Called by the UI when a line brush and a stroke direction are chosen 
 //-------------------------------------------------------------
 void ImpressionistUI::cb_strokeDirectionChoice(Fl_Widget* o, void* v)
-{
+{	
+
 	ImpressionistUI* pUI=((ImpressionistUI *)(o->user_data()));
 	ImpressionistDoc* pDoc=pUI->getDocument();
 
 	int type=(int)v;
 
 	pDoc->setStrokeDirection(type);
+	cout<<"Current Stroke Direction is "<<type<<endl;
 }
 
 //------------------------------------------------------------

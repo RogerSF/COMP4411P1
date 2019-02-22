@@ -42,6 +42,15 @@ public:
 	int x, y;
 };
 
+class Vector 
+{
+public:
+	Vector() {};
+	Vector(float xx, float yy) { x = xx; y = yy; };
+
+	float x, y;
+};
+
 class ImpBrush 
 {
 protected:
@@ -55,6 +64,9 @@ public:
 
 	// according to the source image and the position, determine the draw color
 	void SetColor( const Point source, const float alpha );
+
+	// according to the source image and the position, determine the gradient
+	Vector* GetGradient( const Point Source);
 
 	// get Doc to communicate with it
 	ImpressionistDoc* GetDocument( void );
