@@ -34,7 +34,7 @@ Bonuses:
 
         - [X] :bell: Add controls that allow you to manipulate the color of the image. For example, you could implement independent scaling of the red, green, and blue channels.
 
-          - [ ] :bell: Design a brush that selectively applies one or more filters such as blurring and sharpening.
+          - [X] :bell: Design a brush that selectively applies one or more filters such as blurring and sharpening.
 
             - [ ] :bell: Add an undo feature with at least one level of undo so that you can try a brush and decide to undo its effect on the canvas. This comes in very handy for experimenting with brush and filtering effects.
 

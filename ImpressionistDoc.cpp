@@ -63,6 +63,8 @@ ImpressionistDoc::ImpressionistDoc()
 		= new PressureBrush(this, "Pressure");
 	ImpBrush::c_pBrushes[BRUSH_BLUR]
 		= new BlurBrush(this, "Blur");
+	ImpBrush::c_pBrushes[BRUSH_SHARPEN]
+		= new BlurBrush(this, "Sharpen");
 
 	// make one of the brushes current
 	m_pCurrentBrush	= ImpBrush::c_pBrushes[0];
