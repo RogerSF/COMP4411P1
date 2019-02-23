@@ -30,7 +30,6 @@ public:
 	int		getSize();						// get the UI size
 	void	setSize(int size);				// set the UI size
 	char*	getImageName();					// get the current image name
-	
 
 // Attributes
 public:
@@ -62,11 +61,11 @@ public:
 	int m_nLineAngle;
 	float m_nAlpha;
 
+	ImpressionistUI*	m_pUI;
+
 	// Brush filters
 	GLuFilter* blurFilter;
 	GLuFilter* sharpenFilter;
-
-	ImpressionistUI*	m_pUI;
 
 // Operations
 public:

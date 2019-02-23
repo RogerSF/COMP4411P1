@@ -6,8 +6,8 @@
 //
 // This is the header filter for GLuFilter
 
-#include "ImpressionistDoc.h"
-
+class Point;
+class ImpressionistDoc;
 static float blurMatrix[9] =
 {
 	0.0625, 0.125, 0.0625,
@@ -26,7 +26,7 @@ class GLuFilter
 {
 public:
 	GLuFilter(float* matrix, int width = 3, int height = 3);
-	float filterPixel(const GLubyte* source, Point origin, int sourceWidth, int sourceHeight);
+	float filterPixel(ImpressionistDoc* doc, int rgbOffset, Point origin, int sourceWidth, int sourceHeight);
 	
 private:
 	float* matrix;

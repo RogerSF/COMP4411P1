@@ -298,6 +298,7 @@ void ImpressionistUI::cb_brushChoice(Fl_Widget* o, void* v)
 		case BRUSH_SCATTERED_POINTS:
 		case BRUSH_CIRCLES:
 		case BRUSH_SCATTERED_CIRCLES:
+		case BRUSH_BLUR:
 			pUI->m_LineWidthSlider->deactivate();
 			pUI->m_LineAngleSlider->deactivate();
 			pUI->m_BrushSizeSlider->activate();
@@ -611,6 +612,7 @@ Fl_Menu_Item ImpressionistUI::brushTypeMenu[NUM_BRUSH_TYPE+1] = {
   {"Scattered Lines",	FL_ALT+'m', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_LINES},
   {"Scattered Circles",	FL_ALT+'d', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_CIRCLES},
   {"Pressure",	FL_ALT + 'x', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_PRESSURE},
+  {"Blur",	FL_ALT + 'x', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_BLUR},
   {0}
 };
 

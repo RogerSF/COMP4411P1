@@ -55,13 +55,12 @@ void BlurBrush::setColorWithFilter(const Point source)
 {
 	ImpressionistDoc* pDoc = GetDocument();
 
-
 	GLubyte color[4];
 
 	memcpy(color, pDoc->GetOriginalPixel(source), 3);
-	color[0] = pDoc->blurFilter->filterPixel(color[0])
-	color[1] = color[1] * pDoc->m_pUI->getBlueChannelRatio();
-	color[2] = color[2] * pDoc->m_pUI->getGreenChannelRatio();
+	color[0] = pDoc->blurFilter->filterPixel(pDoc, 0, source, pDoc->m_nWidth, pDoc->m_nHeight);
+	color[1] = pDoc->blurFilter->filterPixel(pDoc, 1, source, pDoc->m_nWidth, pDoc->m_nHeight);
+	color[2] = pDoc->blurFilter->filterPixel(pDoc, 2, source, pDoc->m_nWidth, pDoc->m_nHeight);
 
 	color[0] = color[0] * pDoc->m_pUI->getRedChannelRatio();
 	color[1] = color[1] * pDoc->m_pUI->getBlueChannelRatio();

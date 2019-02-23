@@ -6,7 +6,7 @@
 
 #include "GLuFilter.h"
 #include <cmath>
-#include "FL/gl.h"
+#include "impressionistDoc.h"
 
 GLuFilter::GLuFilter(float* matrix, int width, int height)
 {
@@ -19,13 +19,12 @@ GLuFilter::GLuFilter(float* matrix, int width, int height)
 	filterHeight = height;
 }
 
-float GLuFilter::filterPixel(const GLubyte* source, Point origin, int sourceWidth, int sourceHeight)
+float GLuFilter::filterPixel(ImpressionistDoc* doc, int rgbOffset, Point origin, int sourceWidth, int sourceHeight)
 {
 	int centerX = origin.x - (filterWidth / 2);
 	int centerY = origin.y - (filterHeight / 2);
 
 	float filteredValue = 0;
-
 
 	for (int i = 0; i < filterWidth; i++)
 	{
@@ -33,12 +32,11 @@ float GLuFilter::filterPixel(const GLubyte* source, Point origin, int sourceWidt
 		{
 			// Clamp the pixel matrix inbound
 			int x = (centerX + i < sourceWidth) ? abs(centerX + i) : 2 * (sourceWidth - 1) - (centerX + i);
-			int y = (centerY = j < sourceHeight) ? abs(centerY + j) : 2 * (sourceHeight - 1) - (centerY + j);
+			int y = (centerY + j < sourceHeight) ? abs(centerY + j) : 2 * (sourceHeight - 1) - (centerY + j);
 
 			// Get index for 1D array
-			int sourcePosition = y * sourceWidth + x;
 			int filterPosition = j * filterWidth + i;
-			filteredValue += float(source[sourcePosition] * this->matrix[filterPosition]);
+			filteredValue += float(doc->GetOriginalPixel(x, y)[rgbOffset] * this->matrix[filterPosition]);
 		}
 	}
 
