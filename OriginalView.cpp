@@ -8,6 +8,9 @@
 #include "ImpressionistDoc.h"
 #include "OriginalView.h"
 #include <cmath>
+#include "ImpressionistUI.h"
+#include <ostream>
+#include <iostream>
 
 #ifndef WIN32
 #define min(a, b)	( ( (a)<(b) ) ? (a) : (b) )
@@ -65,7 +68,6 @@ void OriginalView::draw()
 		int	startrow	= m_pDoc->m_nHeight - (scrollpos.y + drawHeight);
 		if ( startrow < 0 ) 
 			startrow = 0;
-
 
 		bitstart = m_pDoc->m_ucBitmap + 3 * ((m_pDoc->m_nWidth * startrow) + scrollpos.x);
 

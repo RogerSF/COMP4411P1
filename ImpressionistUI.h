@@ -33,7 +33,7 @@ public:
 	PaintView*			m_paintView;
 	OriginalView*		m_origView;
 
-// for brush dialog
+	// for brush dialog
 	Fl_Window*			m_brushDialog;
 	Fl_Choice*			m_BrushTypeChoice;
 	Fl_Choice*			m_StrokeDirectionChoice;
@@ -45,12 +45,20 @@ public:
 
 	Fl_Button*          m_ClearCanvasButton;
 
+	// Color channel dialog
+	Fl_Window*			m_colorChannelsDialog;
+
+	Fl_Slider*			m_redChannelSlider;
+	Fl_Slider*			m_greenChannelSlider;
+	Fl_Slider*			m_blueChannelSlider;
+
 	// Member functions
 	void				setDocument(ImpressionistDoc* doc);
 	ImpressionistDoc*	getDocument();
 
 	void				show();
 	void				resize_windows(int w, int h);
+	void				updateColorChannels();
 
 	// Interface to get attribute
 
@@ -63,8 +71,12 @@ public:
 	int					getLineAngle();
 	void				setLineAngle(int angle);
 
-	float					getAlpha();
+	float				getAlpha();
 	void				setAlpha(int angle);
+
+	float				getRedChannelRatio();
+	float				getGreenChannelRatio();
+	float				getBlueChannelRatio();
 
 private:
 	ImpressionistDoc*	m_pDoc;		// pointer to document to communicate with the document
@@ -74,6 +86,11 @@ private:
 	int m_nLineWidth;
 	int m_nLineAngle;
 	float m_nAlpha;
+
+	// Color Channels
+	int m_redChannel;
+	int m_greenChannel;
+	int m_blueChannel;
 
 	// Static class members
 	static Fl_Menu_Item		menuitems[];
@@ -95,6 +112,7 @@ private:
 	static void	cb_clear_canvas(Fl_Menu_* o, void* v);
 	static void	cb_exit(Fl_Menu_* o, void* v);
 	static void	cb_about(Fl_Menu_* o, void* v);
+	static void	cb_colorChannels(Fl_Menu_* o, void* v);
 	static void	cb_swapImages(Fl_Menu_* o, void* v);
 	static void	cb_brushChoice(Fl_Widget* o, void* v);
 	static void	cb_strokeDirectionChoice(Fl_Widget* o, void* v);
@@ -103,9 +121,9 @@ private:
 	static void	cb_widthSlides(Fl_Widget* o, void* v);
 	static void	cb_angleSlides(Fl_Widget* o, void* v);
 	static void	cb_alphaSlides(Fl_Widget* o, void* v);
-
-	
-
+	static void	cb_redChannelSlide(Fl_Widget* o, void* v);
+	static void	cb_greenChannelSlide(Fl_Widget* o, void* v);
+	static void	cb_blueChannelSlide(Fl_Widget* o, void* v);
 };
 
 #endif

@@ -229,12 +229,11 @@ void ImpressionistUI::cb_clear_canvas(Fl_Menu_* o, void* v)
 //------------------------------------------------------------
 void ImpressionistUI::cb_exit(Fl_Menu_* o, void* v) 
 {
-	whoami(o)->m_mainWindow->hide();
-	whoami(o)->m_brushDialog->hide();
-
+	ImpressionistUI * ui = whoami(o);
+	ui->m_mainWindow->hide();
+	ui->m_brushDialog->hide();
+	ui->m_colorChannelsDialog->hide();
 }
-
-
 
 //-----------------------------------------------------------
 // Brings up an about dialog box
@@ -243,6 +242,35 @@ void ImpressionistUI::cb_exit(Fl_Menu_* o, void* v)
 void ImpressionistUI::cb_about(Fl_Menu_* o, void* v) 
 {
 	fl_message("Impressionist FLTK version for CS341, Spring 2002");
+}
+
+//-----------------------------------------------------------
+// Updates the brush size to use from the value of the size
+// slider
+// Called by the UI when the size slider is moved
+//-----------------------------------------------------------
+void ImpressionistUI::cb_swapImages(Fl_Menu_* o, void* v)
+{
+	ImpressionistUI * ui = whoami(o);
+	ImpressionistDoc * pDoc = ui->getDocument();
+	unsigned char* tempPointer = pDoc->m_ucBitmap;
+	pDoc->m_ucBitmap = pDoc->m_ucPainting;
+	pDoc->m_ucPainting = tempPointer;
+
+	ui->m_origView->refresh();
+	ui->m_paintView->refresh();
+}
+
+//-----------------------------------------------------------
+// Updates the brush size to use from the value of the size
+// slider
+// Called by the UI when the size slider is moved
+//-----------------------------------------------------------
+void ImpressionistUI::cb_colorChannels(class Fl_Menu_* o, void* v)
+{
+	ImpressionistUI * ui = whoami(o);
+
+	ui->m_colorChannelsDialog->show();
 }
 
 //------- UI should keep track of the current for all the controls for answering the query from Doc ---------
@@ -357,20 +385,33 @@ void ImpressionistUI::cb_alphaSlides(Fl_Widget* o, void* v)
 }
 
 //-----------------------------------------------------------
-// Updates the brush size to use from the value of the size
-// slider
-// Called by the UI when the size slider is moved
+// Updates red color channels
 //-----------------------------------------------------------
-void ImpressionistUI::cb_swapImages(Fl_Menu_* o, void* v)
+void ImpressionistUI::cb_redChannelSlide(class Fl_Widget* o, void* v)
 {
-	ImpressionistUI * ui = whoami(o);
-	ImpressionistDoc * pDoc = ui->getDocument();
-	unsigned char* tempPointer = pDoc->m_ucBitmap;
-	pDoc->m_ucBitmap = pDoc->m_ucPainting;
-	pDoc->m_ucPainting = tempPointer;
+	ImpressionistUI* ui = ((ImpressionistUI*)(o->user_data()));
+	ui->m_redChannel = int(((Fl_Slider *)o)->value());
+	ui->updateColorChannels();
+}
 
-	ui->m_origView->refresh();
-	ui->m_paintView->refresh();
+//-----------------------------------------------------------
+// Updates green color channels
+//-----------------------------------------------------------
+void ImpressionistUI::cb_greenChannelSlide(class Fl_Widget* o, void* v)
+{
+	ImpressionistUI* ui = ((ImpressionistUI*)(o->user_data()));
+	ui->m_greenChannel = int(((Fl_Slider *)o)->value());
+	ui->updateColorChannels();
+}
+
+//-----------------------------------------------------------
+// Updates blue color channels
+//-----------------------------------------------------------
+void ImpressionistUI::cb_blueChannelSlide(class Fl_Widget* o, void* v)
+{
+	ImpressionistUI* ui = ((ImpressionistUI*)(o->user_data()));
+	ui->m_blueChannel = int(((Fl_Slider *)o)->value());
+	ui->updateColorChannels();
 }
 
 
@@ -511,7 +552,29 @@ void ImpressionistUI::setAlpha( int alpha )
 		m_BrushAlphaSlider->value(m_nAlpha);
 }
 
+float ImpressionistUI::getRedChannelRatio()
+{
+	return float(m_redChannel) / 100;
+}
 
+float ImpressionistUI::getGreenChannelRatio()
+{
+	return float(m_greenChannel) / 100;
+}
+
+
+float ImpressionistUI::getBlueChannelRatio()
+{
+	return float(m_blueChannel) / 100;
+}
+
+//-------------------------------------------------
+// Update color channels
+//-------------------------------------------------
+void ImpressionistUI::updateColorChannels()
+{
+	
+}
 
 
 // Main menu definition
@@ -521,12 +584,15 @@ Fl_Menu_Item ImpressionistUI::menuitems[] = {
 		{ "&Save Image...",	FL_ALT + 's', (Fl_Callback *)ImpressionistUI::cb_save_image },
 		{ "&Brushes...",	FL_ALT + 'b', (Fl_Callback *)ImpressionistUI::cb_brushes }, 
 		{ "&Clear Canvas", FL_ALT + 'c', (Fl_Callback *)ImpressionistUI::cb_clear_canvas, 0, FL_MENU_DIVIDER },
+
+
+		{ "&Color channels", FL_ALT + 'o', (Fl_Callback *)ImpressionistUI::cb_colorChannels, 0, FL_MENU_DIVIDER },
 		
 		{ "&Quit",			FL_ALT + 'q', (Fl_Callback *)ImpressionistUI::cb_exit },
 		{ 0 },
 
 	{ "&Display",		0, 0, 0, FL_SUBMENU },
-		{ "&Swap images",	FL_ALT + 'a', (Fl_Callback *)ImpressionistUI::cb_swapImages },
+		{ "&Swap images",	FL_ALT + 'w', (Fl_Callback *)ImpressionistUI::cb_swapImages },
 		{ 0 },
 
 	{ "&Help",		0, 0, 0, FL_SUBMENU },
@@ -594,6 +660,10 @@ ImpressionistUI::ImpressionistUI() {
 	m_nLineWidth = 0;
 	m_nLineAngle = 0;
 	m_nAlpha = 1.0;
+
+	m_redChannel = 100;
+	m_greenChannel = 100;
+	m_blueChannel = 100;
 
 	// brush dialog definition
 	m_brushDialog = new Fl_Window(400, 325, "Brush Dialog");
@@ -673,4 +743,45 @@ ImpressionistUI::ImpressionistUI() {
 		// glfwSetCursorPosCallback(m_mainWindow, cb_cursor_pos);
 
     m_brushDialog->end();
+
+	// Init color channel window
+	m_colorChannelsDialog = new Fl_Window(380, 100, "Color Channel Dialog");
+
+		m_redChannelSlider = new Fl_Value_Slider(10, 10, 300, 20, "Red");
+		m_redChannelSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_redChannelSlider->type(FL_HOR_NICE_SLIDER);
+		m_redChannelSlider->labelfont(FL_COURIER);
+		m_redChannelSlider->labelsize(12);
+		m_redChannelSlider->minimum(0);
+		m_redChannelSlider->maximum(100);
+		m_redChannelSlider->step(1);
+		m_redChannelSlider->value(m_redChannel);
+		m_redChannelSlider->align(FL_ALIGN_RIGHT);
+		m_redChannelSlider->callback(cb_redChannelSlide);
+
+		m_greenChannelSlider = new Fl_Value_Slider(10, 40, 300, 20, "Green");
+		m_greenChannelSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_greenChannelSlider->type(FL_HOR_NICE_SLIDER);
+		m_greenChannelSlider->labelfont(FL_COURIER);
+		m_greenChannelSlider->labelsize(12);
+		m_greenChannelSlider->minimum(0);
+		m_greenChannelSlider->maximum(100);
+		m_greenChannelSlider->step(1);
+		m_greenChannelSlider->value(m_greenChannel);
+		m_greenChannelSlider->align(FL_ALIGN_RIGHT);
+		m_greenChannelSlider->callback(cb_greenChannelSlide);
+
+		m_blueChannelSlider = new Fl_Value_Slider(10, 70, 300, 20, "Blue");
+		m_blueChannelSlider->user_data((void*)(this));	// record self to be used by static callback functions
+		m_blueChannelSlider->type(FL_HOR_NICE_SLIDER);
+		m_blueChannelSlider->labelfont(FL_COURIER);
+		m_blueChannelSlider->labelsize(12);
+		m_blueChannelSlider->minimum(0);
+		m_blueChannelSlider->maximum(100);
+		m_blueChannelSlider->step(1);
+		m_blueChannelSlider->value(m_blueChannel);
+		m_blueChannelSlider->align(FL_ALIGN_RIGHT);
+		m_blueChannelSlider->callback(cb_blueChannelSlide);
+
+	m_colorChannelsDialog->end();
 }

@@ -32,7 +32,7 @@ Bonuses:
 
       - [X] :notes: Sometimes it is useful to use the contents of the painting window as the original image. Add a control to swap the contents of the painting window and the contents of the original image window.
 
-        - [ ] :bell: Add controls that allow you to manipulate the color of the image. For example, you could implement independent scaling of the red, green, and blue channels.
+        - [X] :bell: Add controls that allow you to manipulate the color of the image. For example, you could implement independent scaling of the red, green, and blue channels.
 
           - [ ] :bell: Design a brush that selectively applies one or more filters such as blurring and sharpening.
 
