@@ -356,6 +356,24 @@ void ImpressionistUI::cb_alphaSlides(Fl_Widget* o, void* v)
 	((ImpressionistUI*)(o->user_data()))->m_nAlpha=float( ((Fl_Slider *)o)->value() ) ;
 }
 
+//-----------------------------------------------------------
+// Updates the brush size to use from the value of the size
+// slider
+// Called by the UI when the size slider is moved
+//-----------------------------------------------------------
+void ImpressionistUI::cb_swapImages(Fl_Menu_* o, void* v)
+{
+	ImpressionistUI * ui = whoami(o);
+	ImpressionistDoc * pDoc = ui->getDocument();
+	unsigned char* tempPointer = pDoc->m_ucBitmap;
+	pDoc->m_ucBitmap = pDoc->m_ucPainting;
+	pDoc->m_ucPainting = tempPointer;
+
+	ui->m_origView->refresh();
+	ui->m_paintView->refresh();
+}
+
+
 
 //-----------------------------------------------------------
 // Updates the CursorHisPos Vector array
@@ -505,6 +523,10 @@ Fl_Menu_Item ImpressionistUI::menuitems[] = {
 		{ "&Clear Canvas", FL_ALT + 'c', (Fl_Callback *)ImpressionistUI::cb_clear_canvas, 0, FL_MENU_DIVIDER },
 		
 		{ "&Quit",			FL_ALT + 'q', (Fl_Callback *)ImpressionistUI::cb_exit },
+		{ 0 },
+
+	{ "&Display",		0, 0, 0, FL_SUBMENU },
+		{ "&Swap images",	FL_ALT + 'a', (Fl_Callback *)ImpressionistUI::cb_swapImages },
 		{ 0 },
 
 	{ "&Help",		0, 0, 0, FL_SUBMENU },

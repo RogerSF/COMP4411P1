@@ -95,6 +95,7 @@ private:
 	static void	cb_clear_canvas(Fl_Menu_* o, void* v);
 	static void	cb_exit(Fl_Menu_* o, void* v);
 	static void	cb_about(Fl_Menu_* o, void* v);
+	static void	cb_swapImages(Fl_Menu_* o, void* v);
 	static void	cb_brushChoice(Fl_Widget* o, void* v);
 	static void	cb_strokeDirectionChoice(Fl_Widget* o, void* v);
 	static void	cb_clear_canvas_button(Fl_Widget* o, void* v);
