@@ -9,6 +9,7 @@
 
 #include "Impressionist.h"
 #include "Bitmap.h"
+#include "GLuFilter.h"
 
 class ImpressionistUI;
 
@@ -60,6 +61,10 @@ public:
 	int m_nLineWidth;
 	int m_nLineAngle;
 	float m_nAlpha;
+
+	// Brush filters
+	GLuFilter* blurFilter;
+	GLuFilter* sharpenFilter;
 
 	ImpressionistUI*	m_pUI;
 

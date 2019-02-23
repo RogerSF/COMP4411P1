@@ -74,7 +74,7 @@ void LineBrush::BrushMove( const Point source, const Point target )
 	glLineWidth(float(lineWidth));
 
 	glBegin( GL_LINE_STRIP );
-		SetColor( source, dlg->getAlpha() );
+		SetColor( source );
 		glVertex2i(target.x - xOffset, target.y - yOffset);
 		glVertex2i(target.x + xOffset, target.y + yOffset);
 

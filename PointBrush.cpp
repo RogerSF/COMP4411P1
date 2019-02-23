@@ -40,7 +40,7 @@ void PointBrush::BrushMove( const Point source, const Point target )
 
 	glBegin( GL_POINTS );
 
-		SetColor( source, dlg->getAlpha() );
+		SetColor( source );
 		glVertex2d( target.x, target.y );
 
 	glEnd();

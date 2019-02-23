@@ -64,7 +64,7 @@ public:
 	virtual void BrushEnd( const Point source, const Point target ) = 0;
 
 	// according to the source image and the position, determine the draw color
-	void SetColor( const Point source, const float alpha );
+	void SetColor( const Point source );
 
 	// according to the source image and the position, determine the gradient
 	Vector* GetGradient( const Point Source);

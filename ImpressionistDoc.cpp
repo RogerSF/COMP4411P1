@@ -64,6 +64,8 @@ ImpressionistDoc::ImpressionistDoc()
 	// make one of the brushes current
 	m_pCurrentBrush	= ImpBrush::c_pBrushes[0];
 
+	this->blurFilter = new GLuFilter(blurMatrix);
+	this->sharpenFilter = new GLuFilter(sharpenMatrix);
 }
 
 
