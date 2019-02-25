@@ -21,24 +21,20 @@ public:
 
 	int		loadImage(char *iname);			// called by the UI to load image
 	int		saveImage(char *iname);			// called by the UI to save image
-
-
+	int		muralImage(char *iname);			// called by the UI to load image
 	int     clearCanvas();                  // called by the UI to clear the drawing canvas
 	void	setBrushType(int type);			// called by the UI to set the brushType
 	void	setStrokeDirection(int type);			// called by the UI to set the strokeDirection
 	int		getSize();						// get the UI size
 	void	setSize(int size);				// set the UI size
-	char*	getImageName();					// get the current image name
-	
+	char*	getImageName();					// get the current image name 
 
 // Attributes
 public:
 	// Dimensions of original window.
-	int				m_nWidth, 
-					m_nHeight;
+	int m_nWidth,  m_nHeight;
 	// Dimensions of the paint window.
-	int				m_nPaintWidth, 
-					m_nPaintHeight;	
+	int m_nPaintWidth, m_nPaintHeight;	
 	// Bitmaps for original image and painting. 
 	unsigned char*	m_ucBitmap;
 	unsigned char*	m_ucPainting;
@@ -50,7 +46,7 @@ public:
 	Vector** rightMousePos;
 
 	// The current active brush.
-	ImpBrush*			m_pCurrentBrush;	
+	ImpBrush* m_pCurrentBrush;	
 
 	//The current stroke direction
 	int m_pCurrentDirection = 0;

@@ -19,6 +19,8 @@
 #include "ScatterPointBrush.h"
 #include "ScatterLineBrush.h"
 #include "ScatterCircleBrush.h"
+#include <iostream>
+using namespace std;
 
 #define DESTROY(p)	{  if ((p)!=NULL) {delete [] p; p=NULL; } }
 
@@ -170,6 +172,78 @@ int ImpressionistDoc::saveImage(char *iname)
 
 	return 1;
 }
+
+//---------------------------------------------------------
+// Mural the specified image
+// This is called by the UI when the mural image button is 
+// pressed.
+//---------------------------------------------------------
+int ImpressionistDoc::muralImage(char *iname) 
+{
+	// try to open the image to read
+	unsigned char*	data;
+	int				width, 
+					height;
+
+	if ( (data=readBMP(iname, width, height))==NULL ) 
+	{
+		fl_alert("Can't load bitmap file");
+		return 0;
+	}
+
+	int tempWidth = m_nWidth;
+	int tempHeight = m_nHeight;
+	unsigned char*	m_ucTempPainting = m_ucPainting;
+
+	// cout<<tempWidth<<endl;
+	// cout<<tempHeight<<endl;
+	// cout<<iname<<endl;
+	// cout<<sizeof(iname)/sizeof(*iname)<<endl;
+
+
+	// reflect the fact of loading the new image
+	m_nWidth		= width;
+	m_nPaintWidth	= width;
+	m_nHeight		= height;
+	m_nPaintHeight	= height;
+
+	// release old storage
+	if ( m_ucBitmap ) delete [] m_ucBitmap;
+	// if ( m_ucPainting ) delete [] m_ucPainting;
+
+	m_ucBitmap	= data;
+
+	// allocate space for draw view
+	
+	// m_ucPainting = new unsigned char [width*height*3];
+	// memset(m_ucPainting, 0, width*height*3);
+
+	// for (int c = 0; c < tempHeight; c++) {
+	// 	for (int i = 0; i < 3 * tempWidth; i ++){
+	// 		if (i < 3 * width) {
+	// 			m_ucPainting[c * 3 * width + i] = m_ucTempPainting[c * 3 * tempWidth + i];
+	// 		}
+	// 	}
+	// }	
+
+	m_pUI->m_mainWindow->resize(m_pUI->m_mainWindow->x(), 
+								m_pUI->m_mainWindow->y(), 
+								width*2, 
+								height+25);
+
+	// display it on origView
+	m_pUI->m_origView->resizeWindow(width, height);	
+	m_pUI->m_origView->refresh();
+
+	// refresh paint view as well
+	m_pUI->m_paintView->resizeWindow(width, height);	
+	m_pUI->m_paintView->refresh();
+
+
+	return 1;
+}
+
+
 
 //----------------------------------------------------------------
 // Clear the drawing canvas
