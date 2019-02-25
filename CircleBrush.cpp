@@ -37,7 +37,7 @@ void CircleBrush::BrushMove( const Point source, const Point target )
 
 	glBegin( GL_TRIANGLE_FAN );
 
-		SetColor( source, dlg->getAlpha() );
+		SetColor( source );
 
 		glVertex2d(target.x, target.y);
 		for (int i = 0; i < 360; i++) {

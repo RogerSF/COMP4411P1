@@ -19,6 +19,9 @@
 #include "ScatterPointBrush.h"
 #include "ScatterLineBrush.h"
 #include "ScatterCircleBrush.h"
+#include "PressureBrush.h"
+#include "BlurBrush.h"
+
 #include <iostream>
 using namespace std;
 
@@ -59,10 +62,18 @@ ImpressionistDoc::ImpressionistDoc()
 		= new ScatterLineBrush( this, "Scattered Lines" );
 	ImpBrush::c_pBrushes[BRUSH_SCATTERED_CIRCLES]	
 		= new ScatterCircleBrush( this, "Scattered Circles" );
+	ImpBrush::c_pBrushes[BRUSH_PRESSURE]
+		= new PressureBrush(this, "Pressure");
+	ImpBrush::c_pBrushes[BRUSH_BLUR]
+		= new BlurBrush(this, "Blur");
+	ImpBrush::c_pBrushes[BRUSH_SHARPEN]
+		= new BlurBrush(this, "Sharpen");
 
 	// make one of the brushes current
 	m_pCurrentBrush	= ImpBrush::c_pBrushes[0];
 
+	this->blurFilter = new GLuFilter(blurMatrix);
+	this->sharpenFilter = new GLuFilter(sharpenMatrix);
 }
 
 

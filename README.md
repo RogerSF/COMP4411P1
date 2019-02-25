@@ -24,17 +24,17 @@ Basics:
 
 Bonuses:
  
-- [ ] :notes: To give your paintings more variety, add some additional brush types to the program. These brush strokes should be substantially different from those you are required to implement. You will get one whistle for each new brush (within reason).
+- [X] :notes: To give your paintings more variety, add some additional brush types to the program. These brush strokes should be substantially different from those you are required to implement. You will get one whistle for each new brush (within reason).
 
-  - [ ] :notes: The skeleton program allows the user to paint outside the boundary of the paint rectangle, then erases this region when the stroke is completed. Change this to clip brush strokes to the region as they're being painted.
+  - [X] :notes: The skeleton program allows the user to paint outside the boundary of the paint rectangle, then erases this region when the stroke is completed. Change this to clip brush strokes to the region as they're being painted.
 
-    - [ ] :notes: When using your program, you currently can't see what part of the original image you're painting. Extend the program so that when the cursor is in the painting window, a marker appears on the original image showing where you're painting.
+    - [X] :notes: When using your program, you currently can't see what part of the original image you're painting. Extend the program so that when the cursor is in the painting window, a marker appears on the original image showing where you're painting.
 
-      - [ ] :notes: Sometimes it is useful to use the contents of the painting window as the original image. Add a control to swap the contents of the painting window and the contents of the original image window.
+      - [X] :notes: Sometimes it is useful to use the contents of the painting window as the original image. Add a control to swap the contents of the painting window and the contents of the original image window.
 
-        - [ ] :bell: Add controls that allow you to manipulate the color of the image. For example, you could implement independent scaling of the red, green, and blue channels.
+        - [X] :bell: Add controls that allow you to manipulate the color of the image. For example, you could implement independent scaling of the red, green, and blue channels.
 
-          - [ ] :bell: Design a brush that selectively applies one or more filters such as blurring and sharpening.
+          - [X] :bell: Design a brush that selectively applies one or more filters such as blurring and sharpening.
 
             - [ ] :bell: Add an undo feature with at least one level of undo so that you can try a brush and decide to undo its effect on the canvas. This comes in very handy for experimenting with brush and filtering effects.
 
