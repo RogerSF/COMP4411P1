@@ -203,7 +203,7 @@ void ImpressionistUI::cb_save_image(Fl_Menu_* o, void* v)
 }
 
 //------------------------------------------------------------------
-// Brings up a file chooser and then loads the chosen image
+// Brings up a file chooser and then loads the chosen image with the canvas unchanged
 // This is called by the UI when the load image menu item is chosen
 //------------------------------------------------------------------
 void ImpressionistUI::cb_mural(Fl_Menu_* o, void* v) 
@@ -214,6 +214,19 @@ void ImpressionistUI::cb_mural(Fl_Menu_* o, void* v)
 	if (newfile != NULL) {
 		pDoc->muralImage(newfile);
 	}
+}
+
+//------------------------------------------------------------------
+// Automatically paint a graph
+// This is called by the UI when the load image menu item is chosen
+//------------------------------------------------------------------
+void ImpressionistUI::cb_auto_paint(Fl_Menu_* o, void* v) 
+{
+	ImpressionistDoc *pDoc=whoami(o)->getDocument();
+	// to be implemented 
+	// cout<< "Auto paint is called without implementation"<< endl;
+	pDoc -> autoPaint();
+	
 }
 
 
@@ -505,6 +518,7 @@ Fl_Menu_Item ImpressionistUI::menuitems[] = {
 		{ "&Load Image...",	FL_ALT + 'l', (Fl_Callback *)ImpressionistUI::cb_load_image },
 		{ "&Save Image...",	FL_ALT + 's', (Fl_Callback *)ImpressionistUI::cb_save_image },
 		{ "&Mural...",	FL_ALT + 'm', (Fl_Callback *)ImpressionistUI::cb_mural },
+		{ "&Auto-paint...",	FL_ALT + 'a', (Fl_Callback *)ImpressionistUI::cb_auto_paint },
 		{ "&Brushes...",	FL_ALT + 'b', (Fl_Callback *)ImpressionistUI::cb_brushes }, 
 		{ "&Clear Canvas", FL_ALT + 'c', (Fl_Callback *)ImpressionistUI::cb_clear_canvas, 0, FL_MENU_DIVIDER },
 		

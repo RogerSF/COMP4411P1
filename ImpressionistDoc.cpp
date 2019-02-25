@@ -295,3 +295,16 @@ GLubyte* ImpressionistDoc::GetOriginalPixel( const Point p )
 	return GetOriginalPixel( p.x, p.y );
 }
 
+//----------------------------------------------------------------
+// Automatically paint the canvas
+// This is called by the UI when the auto-paint canvas menu item is 
+// chosen
+//-----------------------------------------------------------------
+void ImpressionistDoc::autoPaint() 
+{
+	// m_pCurrentBrush
+	cout<< "TO BE IMPLEMENTED"<<endl;
+
+	
+	
+}

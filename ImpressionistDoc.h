@@ -19,15 +19,16 @@ public:
 
 	void	setUI(ImpressionistUI* ui);		// Assign the UI to use
 
-	int		loadImage(char *iname);			// called by the UI to load image
-	int		saveImage(char *iname);			// called by the UI to save image
+	int		loadImage(char *iname);				// called by the UI to load image
+	int		saveImage(char *iname);				// called by the UI to save image
 	int		muralImage(char *iname);			// called by the UI to load image
-	int     clearCanvas();                  // called by the UI to clear the drawing canvas
-	void	setBrushType(int type);			// called by the UI to set the brushType
-	void	setStrokeDirection(int type);			// called by the UI to set the strokeDirection
-	int		getSize();						// get the UI size
-	void	setSize(int size);				// set the UI size
-	char*	getImageName();					// get the current image name 
+	int     	clearCanvas();                  				// called by the UI to clear the drawing canvas
+	void 		autoPaint();									// called by the UI to automatically paint the canvas
+	void		setBrushType(int type);				// called by the UI to set the brushType
+	void		setStrokeDirection(int type);		// called by the UI to set the strokeDirection
+	int		getSize();										// get the UI size
+	void		setSize(int size);							// set the UI size
+	char*	getImageName();							// get the current image name 
 
 // Attributes
 public:
