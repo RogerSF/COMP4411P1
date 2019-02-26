@@ -8,24 +8,26 @@
 #ifndef HISTORYMANAGER_H
 #define HISTORYMANAGER_H
 
-#include <list>
+#include <deque>
 
 class HistoryManager
 {
 public:
 	HistoryManager();
 	~HistoryManager();
-	void pushHistoryBitmap(const unsigned char* source);
+	void pushHistoryBitmap(const unsigned char* source, const int width, const int height);
 	void popHistoryBitmap();
+	bool isRedoAvailable();
+	bool isUndoAvailable();
 	unsigned char* redo();
 	unsigned char* undo();
 
 private:
 	void popUntilRedoCleared();
-	bool isRedoAvailable();
 
-	int redoCounter = 0;
-	std::list<unsigned char*> historyPointerList;
+	int pointerPosition;
+	std::deque<unsigned char*> historyPointerQueue;
+	const int HISTORY_MAX = 10;
 };
 
 #endif

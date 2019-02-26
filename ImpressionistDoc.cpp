@@ -74,6 +74,9 @@ ImpressionistDoc::ImpressionistDoc()
 
 	this->blurFilter = new GLuFilter(blurMatrix);
 	this->sharpenFilter = new GLuFilter(sharpenMatrix);
+
+	// Init history manager
+	this->historyManager = new HistoryManager();
 }
 
 
@@ -262,6 +265,7 @@ int ImpressionistDoc::clearCanvas()
 		// allocate space for draw view
 		m_ucPainting	= new unsigned char [m_nPaintWidth*m_nPaintHeight*3];
 		memset(m_ucPainting, 0, m_nPaintWidth*m_nPaintHeight*3);
+		this->historyManager->pushHistoryBitmap(m_ucPainting, m_nPaintWidth, m_nPaintHeight);
 
 		// refresh paint view as well	
 		m_pUI->m_paintView->refresh();
