@@ -25,13 +25,7 @@ HistoryManager::~HistoryManager()
 // Private methods
 void HistoryManager::popUntilRedoCleared()
 {
-	for(int i = 0; i < this->pointerPosition; i++)
-	{
-		delete[] this->historyPointerQueue.front();
-		this->historyPointerQueue.front() = nullptr;
-		this->historyPointerQueue.pop_front();
-	}
-
+	this->historyPointerQueue.clear();
 	this->pointerPosition = 0;
 }
 

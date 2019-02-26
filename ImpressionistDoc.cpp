@@ -155,6 +155,7 @@ int ImpressionistDoc::loadImage(char *iname)
 	// allocate space for draw view
 	m_ucPainting	= new unsigned char [width*height*3];
 	memset(m_ucPainting, 0, width*height*3);
+	this->historyManager->pushHistoryBitmap(m_ucPainting, m_nPaintWidth, m_nPaintHeight);
 
 	m_pUI->m_mainWindow->resize(m_pUI->m_mainWindow->x(), 
 								m_pUI->m_mainWindow->y(), 
