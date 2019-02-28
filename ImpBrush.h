@@ -29,6 +29,7 @@ enum
 	SLIDER = 0,
 	RIGHTMOUSE,
 	GRADIENT,
+	DIFFPICGRADIENT,
 	BRUSH_DIRECTION,
 	NUM_DIRECTION // Make sure this stays at the end!
 };

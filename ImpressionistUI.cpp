@@ -356,8 +356,15 @@ void ImpressionistUI::cb_strokeDirectionChoice(Fl_Widget* o, void* v)
 	ImpressionistDoc* pDoc=pUI->getDocument();
 
 	int type=(int)v;
-
 	pDoc->setStrokeDirection(type);
+	if (type == DIFFPICGRADIENT) {
+		char* newfile = fl_file_chooser("Open File?", "*.bmp", pDoc->getImageName() );
+		if (newfile != NULL) {
+			pDoc->muralImage(newfile);
+		}
+	}
+
+	
 	// cout<<"Current Stroke Direction is "<<type<<endl;
 }
 
@@ -616,10 +623,7 @@ Fl_Menu_Item ImpressionistUI::menuitems[] = {
 		{ "&Auto-paint...",	FL_ALT + 'a', (Fl_Callback *)ImpressionistUI::cb_auto_paint },
 		{ "&Brushes...",	FL_ALT + 'b', (Fl_Callback *)ImpressionistUI::cb_brushes }, 
 		{ "&Clear Canvas", FL_ALT + 'c', (Fl_Callback *)ImpressionistUI::cb_clear_canvas, 0, FL_MENU_DIVIDER },
-
-
 		{ "&Color channels", FL_ALT + 'o', (Fl_Callback *)ImpressionistUI::cb_colorChannels, 0, FL_MENU_DIVIDER },
-		
 		{ "&Quit",			FL_ALT + 'q', (Fl_Callback *)ImpressionistUI::cb_exit },
 		{ 0 },
 
@@ -636,24 +640,25 @@ Fl_Menu_Item ImpressionistUI::menuitems[] = {
 
 // Brush choice menu definition
 Fl_Menu_Item ImpressionistUI::brushTypeMenu[NUM_BRUSH_TYPE+1] = {
-  {"Points",			FL_ALT+'p', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_POINTS},
-  {"Lines",				FL_ALT+'l', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_LINES},
-  {"Circles",			FL_ALT+'c', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_CIRCLES},
+  {"Points",					FL_ALT+'p', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_POINTS},
+  {"Lines",						FL_ALT+'l', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_LINES},
+  {"Circles",					FL_ALT+'c', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_CIRCLES},
   {"Scattered Points",	FL_ALT+'q', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_POINTS},
   {"Scattered Lines",	FL_ALT+'m', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_LINES},
   {"Scattered Circles",	FL_ALT+'d', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SCATTERED_CIRCLES},
-  {"Pressure",	FL_ALT + 'x', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_PRESSURE},
-  {"Blur",	FL_ALT + 'x', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_BLUR},
-  {"Sharpen",	FL_ALT + 'x', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SHARPEN},
+  {"Pressure",				FL_ALT + 'x', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_PRESSURE},
+  {"Blur",						FL_ALT + 'x', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_BLUR},
+  {"Sharpen",					FL_ALT + 'x', (Fl_Callback *)ImpressionistUI::cb_brushChoice, (void *)BRUSH_SHARPEN},
   {0}
 };
 
 // Brush choice menu definition
 Fl_Menu_Item ImpressionistUI::strokeDirectionMenu[NUM_DIRECTION+1] = {
-  {"Slider",			FL_ALT+'s', (Fl_Callback *)ImpressionistUI::cb_strokeDirectionChoice, (void *)SLIDER},
+  {"Slider",					FL_ALT+'s', (Fl_Callback *)ImpressionistUI::cb_strokeDirectionChoice, (void *)SLIDER},
   {"Right Mouse",			FL_ALT+'k', (Fl_Callback *)ImpressionistUI::cb_strokeDirectionChoice, (void *)RIGHTMOUSE},
   {"Gradient",				FL_ALT+'g', (Fl_Callback *)ImpressionistUI::cb_strokeDirectionChoice, (void *)GRADIENT},
-  {"Brush Direction",			FL_ALT+'b', (Fl_Callback *)ImpressionistUI::cb_strokeDirectionChoice, (void *)BRUSH_DIRECTION},
+  {"Diff Pic Gradient",	FL_ALT+'d', (Fl_Callback *)ImpressionistUI::cb_strokeDirectionChoice, (void *)DIFFPICGRADIENT},
+  {"Brush Direction",		FL_ALT+'b', (Fl_Callback *)ImpressionistUI::cb_strokeDirectionChoice, (void *)BRUSH_DIRECTION},
   {0}
 };
 

@@ -229,15 +229,6 @@ int ImpressionistDoc::muralImage(char *iname)
 		m_ucPainting[cur_Row * 3 * width + cur_Col] = m_ucTempPainting[i];
 	} 
 
-
-	// for (int c = 0; c < tempHeight; c++) {
-	// 	for (int i = 0; i < 3 * tempWidth; i ++){
-	// 		if (i < 3 * width) {
-	// 			m_ucPainting[c * 3 * width + i] = m_ucTempPainting[c * 3 * tempWidth + i];
-	// 		}
-	// 	}
-	// }	
-
 	m_pUI->m_mainWindow->resize(m_pUI->m_mainWindow->x(), 
 								m_pUI->m_mainWindow->y(), 
 								width*2, 
