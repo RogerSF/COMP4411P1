@@ -53,7 +53,7 @@ void PaintView::draw()
 	if(!valid())
 	{
 
-		glClearColor(0.7f, 0.7f, 0.7f, 1.0);
+		glClearColor( 0.7f, 0.7f, 0.7f, 1.0 );
 
 		// We're only using 2-D, so turn off depth 
 		glDisable( GL_DEPTH_TEST );
@@ -88,9 +88,9 @@ void PaintView::draw()
 	m_nDrawHeight	= drawHeight;
 
 	m_nStartRow		= startrow;
-	m_nEndRow		= startrow + drawHeight;
-	m_nStartCol		= scrollpos.x;
-	m_nEndCol		= m_nStartCol + drawWidth;
+	m_nEndRow			= startrow + drawHeight;
+	m_nStartCol			= scrollpos.x;
+	m_nEndCol			= m_nStartCol + drawWidth;
 
 	if ( m_pDoc->m_ucPainting && !isAnEvent) 
 	{
@@ -112,16 +112,16 @@ void PaintView::draw()
 		{
 		case LEFT_MOUSE_DOWN:
 			m_pDoc->m_pCurrentBrush->BrushBegin( source, target );
+			// cout<<"Point coord: "<<coord.x<<" , " << coord.y <<endl;//"; target: " << target.x <<" , "<<target.y<<endl;
 			break;
 		case LEFT_MOUSE_DRAG:
 			m_pDoc->m_pCurrentBrush->BrushMove( source, target );
-
-			// Clipping the brush stroke as they are painted
-			SaveCurrentContent();
-			RestoreContent();
 			break;
 		case LEFT_MOUSE_UP:
 			m_pDoc->m_pCurrentBrush->BrushEnd( source, target );
+			// Clipping the brush stroke as they are painted
+			SaveCurrentContent();
+			RestoreContent();
 			break;
 		case RIGHT_MOUSE_DOWN:
 			m_pDoc->rightMousePos[1]->x = coord.x;
@@ -262,4 +262,105 @@ void PaintView::RestoreContent()
 				  m_pPaintBitstart);
 
 //	glDrawBuffer(GL_FRONT);
+}
+
+void PaintView::autoPaint() {
+
+	#ifndef MESA
+	// To avoid flicker on some machines.
+	glDrawBuffer(GL_FRONT_AND_BACK);
+	#endif // !MESA
+
+	if(!valid())
+	{
+
+		glClearColor( 0.7f, 0.7f, 0.7f, 1.0 );
+
+		// We're only using 2-D, so turn off depth 
+		glDisable( GL_DEPTH_TEST );
+
+		ortho();
+
+		glClear( GL_COLOR_BUFFER_BIT );
+
+		// Enable transparency
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+	Point scrollpos;// = GetScrollPosition();
+	scrollpos.x = 0;
+	scrollpos.y	= 0;
+
+	m_nWindowWidth	= w();
+	m_nWindowHeight	= h();
+
+	int drawWidth, drawHeight;
+	drawWidth = min( m_nWindowWidth, m_pDoc->m_nPaintWidth );
+	drawHeight = min( m_nWindowHeight, m_pDoc->m_nPaintHeight );
+
+	int startrow = m_pDoc->m_nPaintHeight - (scrollpos.y + drawHeight);
+	if ( startrow < 0 ) startrow = 0;
+
+	m_pPaintBitstart = m_pDoc->m_ucPainting + 
+		3 * ((m_pDoc->m_nPaintWidth * startrow) + scrollpos.x);
+
+	m_nDrawWidth	= drawWidth;
+	m_nDrawHeight	= drawHeight;
+
+	m_nStartRow		= startrow;
+	m_nEndRow			= startrow + drawHeight;
+	m_nStartCol			= scrollpos.x;
+	m_nEndCol			= m_nStartCol + drawWidth;
+
+	for (int x = 1; x < drawWidth; x += 30) {
+		for (int y = 1; y < drawHeight; y += 30) {
+			Point source( x + m_nStartCol, m_nEndRow - y );
+			Point target( x , m_nWindowHeight - y );
+			
+			for (int delta_x = 0; delta_x <= 5; delta_x++) {
+				for (int delta_y = 0; delta_y < 5; delta_y++) {
+					source.x += delta_x;
+					source.y += delta_x;
+					target.x += delta_y;
+					target.y += delta_y;
+					// cout<<source.x<<", "<<source.y<<"; "<<target.x<<", "<<target.y<<endl;
+					m_pDoc->m_pCurrentBrush->BrushBegin( source, target );
+					m_pDoc->m_pCurrentBrush->BrushMove( source, target );	
+					m_pDoc->m_pCurrentBrush->BrushEnd( source, target );
+					SaveCurrentContent();
+				} 
+			} 			
+		}
+	}
+
+	// Point source( 50 + m_nStartCol, m_nEndRow - 40 );
+	// Point target( 50 , m_nWindowHeight - 40 );	
+
+	// Point source1( 70 + m_nStartCol, m_nEndRow - 40 + 20 );
+	// Point target1( 70 , m_nWindowHeight - 40 + 20 );	
+
+
+	// m_pDoc->m_pCurrentBrush->BrushBegin( source, target );
+	// m_pDoc->m_pCurrentBrush->BrushMove( source1, target1 );
+	
+	// m_pDoc->m_pCurrentBrush->BrushEnd( source1, target1 );
+	// SaveCurrentContent();
+	// RestoreContent();
+	// m_pDoc->m_pCurrentBrush->BrushEnd( source, target );
+	// for (int x = 1; x < drawWidth; x+= 40 ){
+	// 	for (int y = 1; y < drawHeight; y += 40) {
+	// 		Point source( x + m_nStartCol, m_nEndRow - y );
+	// 		Point target( x + m_nStartCol + 20, m_nEndRow - y + 20);
+	// 		m_pDoc->m_pCurrentBrush->BrushBegin( source, source );
+	// 		m_pDoc->m_pCurrentBrush->BrushMove( target, target );
+	// 		// Clipping the brush stroke as they are painted
+	// 		SaveCurrentContent();
+	// 		RestoreContent();
+	// 		m_pDoc->m_pCurrentBrush->BrushEnd( source, target );
+	// 	}
+	// }
+
+
+	
 }

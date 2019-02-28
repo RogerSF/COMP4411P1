@@ -18,9 +18,10 @@ class ImpressionistDoc;
 class PaintView : public Fl_Gl_Window
 {
 public:
-	PaintView(int x, int y, int w, int h, const char* l);
+	PaintView(int x, int y, int w, int h, const char* l); //x,y gives position; w,h gives size
 	void draw();
 	int handle(int event);
+	void autoPaint();
 
 	void refresh();
 	
@@ -28,7 +29,7 @@ public:
 
 	void SaveCurrentContent();
 
-	void RestoreContent();
+	void RestoreContent(); 
 
 	ImpressionistDoc *m_pDoc;
 

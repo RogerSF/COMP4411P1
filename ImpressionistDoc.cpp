@@ -306,6 +306,8 @@ GLubyte* ImpressionistDoc::GetOriginalPixel( const Point p )
 	return GetOriginalPixel( p.x, p.y );
 }
 
+
+/**
 //----------------------------------------------------------------
 // Automatically paint the canvas
 // This is called by the UI when the auto-paint canvas menu item is 
@@ -313,9 +315,72 @@ GLubyte* ImpressionistDoc::GetOriginalPixel( const Point p )
 //-----------------------------------------------------------------
 void ImpressionistDoc::autoPaint() 
 {
-	// m_pCurrentBrush
-	cout<< "TO BE IMPLEMENTED"<<endl;
+	clearCanvas();
+	cout<<"To be implemented"<<endl;
+	
+	GLvoid* m_pPaintBitstart;
+	int m_nWindowHeight, m_nDrawHeight, m_nDrawWidth;
+	m_nWindowHeight = m_nPaintHeight;
+	m_nDrawHeight = m_nPaintHeight;
+	m_nDrawWidth = m_nPaintWidth;
+	int startrow = m_nPaintHeight - m_nPaintHeight;
+	m_pPaintBitstart = m_ucPainting + 3 * (m_nPaintWidth * startrow);
+	
+	for (int x = 1; x < 10 ; x += 10) { // m_nPaintWidth
+		for (int y = 1; y < 10 ; y += 10) { // m_nPaintHeight
+
+			Point source(x, y);
+			Point end(x+20, y+20);
+			cout<< x << " , "<<y<<endl;
+			m_pCurrentBrush->BrushBegin( source, source );
+			m_pCurrentBrush->BrushMove( end, end );
+			// SaveCurrentContent();
+			// Tell openGL to read from the front buffer when capturing
+			// out paint strokes
+
+			// glReadBuffer(GL_FRONT);
+
+			// glPixelStorei( GL_PACK_ALIGNMENT, 1 );
+			// glPixelStorei( GL_PACK_ROW_LENGTH, m_nPaintWidth );
+			
+			// glReadPixels( 0, 
+			// 			  m_nWindowHeight - m_nDrawHeight, 
+			// 			  m_nDrawWidth, 
+			// 			  m_nDrawHeight, 
+			// 			  GL_RGB, 
+			// 			  GL_UNSIGNED_BYTE, 
+			// 			  m_pPaintBitstart );
+			// // RestoreContent();
+			// glDrawBuffer(GL_BACK);
+
+			// glClear( GL_COLOR_BUFFER_BIT );
+
+			// glRasterPos2i( 0, m_nWindowHeight - m_nDrawHeight );
+			// glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
+			// glPixelStorei( GL_UNPACK_ROW_LENGTH, m_nPaintWidth );
+			// glDrawPixels( m_nDrawWidth, 
+			// 			  m_nDrawHeight, 
+			// 			  GL_RGB, 
+			// 			  GL_UNSIGNED_BYTE, 
+			// 			  m_pPaintBitstart);
+
+
+			// m_pCurrentBrush->BrushEnd( end, end );
+		}
+	}
+
+
+
+	//for (X, Y) in a set of values:
+	// Point source( 100 + m_nStartCol, m_nEndRow - 100 );
+	// Point target( 100, m_nWindowHeight - 100 );
+
+	// m_pCurrentBrush->BrushBegin( source, target );
+	// m_pCurrentBrush->BrushMove( source, target );
+	// // SaveCurrentContent();
+	// // RestoreContent();
+	// m_pCurrentBrush->BrushEnd( source, target );
 
 	
-	
 }
+*/

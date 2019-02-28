@@ -24,7 +24,7 @@ public:
 	int		saveImage(char *iname);				// called by the UI to save image
 	int		muralImage(char *iname);			// called by the UI to load image
 	int     	clearCanvas();                  				// called by the UI to clear the drawing canvas
-	void 		autoPaint();									// called by the UI to automatically paint the canvas
+	// void 		autoPaint();									// called by the UI to automatically paint the canvas
 	void		setBrushType(int type);				// called by the UI to set the brushType
 	void		setStrokeDirection(int type);		// called by the UI to set the strokeDirection
 	int		getSize();										// get the UI size
@@ -71,9 +71,6 @@ public:
 	GLubyte* GetOriginalPixel( int x, int y );   
 	// Get the color of the original picture at the specified point	
 	GLubyte* GetOriginalPixel( const Point p );  
-
-	
-
 
 private:
 	char			m_imageName[256];

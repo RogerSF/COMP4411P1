@@ -46,7 +46,7 @@ Bonuses:
 
 - [ ] :bell::notes: To make your painting more interesting, add "alpha-mapped" brush strokes. In other words, allow the user to load a bitmap representing a brush stroke. This bitmap would contain an alpha value at each position. Then when this brush is used to draw, a single color would be selected from the image, all pixels in the brush bitmap would be set to this RGB color (without changing the alpha value), and this partially transparent bitmap would be painted on the canvas. A new color would be used each time the brush is drawn.
 
-- [ ] :bell::notes: It can be time-consuming to paint an image manually. Add a feature so that a whole painting can be created automatically. The user should only have to specify a brush type, size, and angle to use. Then the program should automatically paint brush strokes over the entire image, using a randomized brush order and varying the brush attributes slightly as it goes (to increase realism).
+- [X] :bell::notes: It can be time-consuming to paint an image manually. Add a feature so that a whole painting can be created automatically. The user should only have to specify a brush type, size, and angle to use. Then the program should automatically paint brush strokes over the entire image, using a randomized brush order and varying the brush attributes slightly as it goes (to increase realism).
 
 - [ ] :bell::notes: At times, you may want the brush strokes to follow the gradient of a different image than the base image. Add a button(s) that will cause the direction of brush strokes to be automatically determined from a user specified image.
 

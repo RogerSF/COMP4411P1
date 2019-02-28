@@ -11,7 +11,6 @@
 
 #include "ImpressionistUI.h"
 #include "ImpressionistDoc.h"
-
 #include "ImpBrush.h"
 #include <iostream>
 using namespace std;
@@ -223,9 +222,11 @@ void ImpressionistUI::cb_mural(Fl_Menu_* o, void* v)
 void ImpressionistUI::cb_auto_paint(Fl_Menu_* o, void* v) 
 {
 	ImpressionistDoc *pDoc=whoami(o)->getDocument();
+	ImpressionistUI * ui = whoami(o);
 	// to be implemented 
 	// cout<< "Auto paint is called without implementation"<< endl;
-	pDoc -> autoPaint();
+	// pDoc -> autoPaint();
+	ui -> m_paintView -> autoPaint();
 	
 }
 

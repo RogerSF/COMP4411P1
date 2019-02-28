@@ -62,13 +62,13 @@ public:
 
 	// Interface to get attribute
 
-	int					getSize();
+	int				getSize();
 	void				setSize(int size);
 
-	int					getLineWidth();
+	int				getLineWidth();
 	void				setLineWidth(int width);
 
-	int					getLineAngle();
+	int				getLineAngle();
 	void				setLineAngle(int angle);
 
 	float				getAlpha();
