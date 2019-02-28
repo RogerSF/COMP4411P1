@@ -193,8 +193,7 @@ int ImpressionistDoc::muralImage(char *iname)
 {
 	// try to open the image to read
 	unsigned char*	data;
-	int				width, 
-					height;
+	int					width, height;
 
 	if ( (data=readBMP(iname, width, height))==NULL ) 
 	{
@@ -202,20 +201,15 @@ int ImpressionistDoc::muralImage(char *iname)
 		return 0;
 	}
 
-	int tempWidth = m_nWidth;
-	int tempHeight = m_nHeight;
+	int tempWidth 		= m_nPaintWidth;
+	int tempHeight 	= m_nPaintHeight;
+	int tempSize 		= m_nPaintHeight * m_nPaintWidth * 3;
 	unsigned char*	m_ucTempPainting = m_ucPainting;
 
-	// cout<<tempWidth<<endl;
-	// cout<<tempHeight<<endl;
-	// cout<<iname<<endl;
-	// cout<<sizeof(iname)/sizeof(*iname)<<endl;
-
-
 	// reflect the fact of loading the new image
-	m_nWidth		= width;
+	m_nWidth			= width;
 	m_nPaintWidth	= width;
-	m_nHeight		= height;
+	m_nHeight			= height;
 	m_nPaintHeight	= height;
 
 	// release old storage
@@ -226,8 +220,15 @@ int ImpressionistDoc::muralImage(char *iname)
 
 	// allocate space for draw view
 	
-	// m_ucPainting = new unsigned char [width*height*3];
-	// memset(m_ucPainting, 0, width*height*3);
+	m_ucPainting = new unsigned char [width*height*3];
+	memset(m_ucPainting, 0, width*height*3);
+
+	for (int i = 0; i < tempSize; i++) {
+		int cur_Row = i / (3 * tempWidth);
+		int cur_Col = i - 3 * tempWidth * cur_Row;
+		m_ucPainting[cur_Row * 3 * width + cur_Col] = m_ucTempPainting[i];
+	} 
+
 
 	// for (int c = 0; c < tempHeight; c++) {
 	// 	for (int i = 0; i < 3 * tempWidth; i ++){
@@ -245,11 +246,9 @@ int ImpressionistDoc::muralImage(char *iname)
 	// display it on origView
 	m_pUI->m_origView->resizeWindow(width, height);	
 	m_pUI->m_origView->refresh();
-
 	// refresh paint view as well
 	m_pUI->m_paintView->resizeWindow(width, height);	
 	m_pUI->m_paintView->refresh();
-
 
 	return 1;
 }
