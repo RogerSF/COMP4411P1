@@ -290,6 +290,32 @@ void ImpressionistUI::cb_swapImages(Fl_Menu_* o, void* v)
 	ui->m_paintView->refresh();
 }
 
+void ImpressionistUI::cb_undo(Fl_Menu_* o, void* v)
+{
+	ImpressionistUI * ui = whoami(o);
+	ImpressionistDoc * pDoc = ui->getDocument();
+	if (!pDoc->historyManager->isUndoAvailable()) return;
+	unsigned char* history = pDoc->historyManager->undo();
+	if(history != nullptr)
+	{
+		pDoc->m_ucPainting = history;
+		ui->m_paintView->refresh();
+	}
+}
+
+void ImpressionistUI::cb_redo(Fl_Menu_* o, void* v)
+{
+	ImpressionistUI * ui = whoami(o);
+	ImpressionistDoc * pDoc = ui->getDocument();
+	unsigned char* history = pDoc->historyManager->redo();
+	if (history != nullptr)
+	{
+		pDoc->m_ucPainting = history;
+		ui->m_paintView->refresh();
+	}
+}
+
+
 //-----------------------------------------------------------
 // Updates the brush size to use from the value of the size
 // slider
@@ -625,6 +651,11 @@ Fl_Menu_Item ImpressionistUI::menuitems[] = {
 		{ "&Clear Canvas", FL_ALT + 'c', (Fl_Callback *)ImpressionistUI::cb_clear_canvas, 0, FL_MENU_DIVIDER },
 		{ "&Color channels", FL_ALT + 'o', (Fl_Callback *)ImpressionistUI::cb_colorChannels, 0, FL_MENU_DIVIDER },
 		{ "&Quit",			FL_ALT + 'q', (Fl_Callback *)ImpressionistUI::cb_exit },
+		{ 0 },
+
+	{ "&Edit",		0, 0, 0, FL_SUBMENU },
+		{ "&Undo",	FL_CTRL + 'z', (Fl_Callback *)ImpressionistUI::cb_undo },
+		{ "&Redo",	FL_CTRL + FL_ALT + 'z', (Fl_Callback *)ImpressionistUI::cb_redo },
 		{ 0 },
 
 	{ "&Display",		0, 0, 0, FL_SUBMENU },

@@ -10,6 +10,7 @@
 #include "Impressionist.h"
 #include "Bitmap.h"
 #include "GLuFilter.h"
+#include "HistoryManager.h"
 
 class ImpressionistUI;
 
@@ -64,6 +65,9 @@ public:
 	// Brush filters
 	GLuFilter* blurFilter;
 	GLuFilter* sharpenFilter;
+
+	// History manager
+	HistoryManager* historyManager;
 
 // Operations
 public:

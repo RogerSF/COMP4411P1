@@ -119,6 +119,7 @@ void PaintView::draw()
 			break;
 		case LEFT_MOUSE_UP:
 			m_pDoc->m_pCurrentBrush->BrushEnd( source, target );
+			m_pDoc->historyManager->pushHistoryBitmap(m_pDoc->m_ucPainting, m_pDoc->m_nPaintWidth, m_pDoc->m_nPaintHeight);
 			// Clipping the brush stroke as they are painted
 			SaveCurrentContent();
 			RestoreContent();
